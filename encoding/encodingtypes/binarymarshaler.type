@@ -1,0 +1,7 @@
+// BinaryMarshaler is the interface implemented by an object that can
+// marshal itself into a binary form.
+//
+// MarshalBinary encodes the receiver into a binary form and returns the result.
+type BinaryMarshaler interface {
+	MarshalBinary() (data []byte, err error)
+}

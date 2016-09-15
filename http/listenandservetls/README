@@ -1,0 +1,11 @@
+TO ACTUALLY RUN
+sudo go run main.go
+
+
+Go to https://www.kaihag.com/https-and-go/ to get tutorial on setting up
+a simple sel signed open ssl cert and starting the tls server using
+http.ListenAndServeTLS
+
+To generate an ssl certificate, either run generate_cert/generate_cert.go
+or directly generate an ssl certificate using openssl and follow it's steps:
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout key.pem -out cert.pem

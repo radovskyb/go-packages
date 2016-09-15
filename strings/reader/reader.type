@@ -1,0 +1,8 @@
+// A Reader implements the io.Reader, io.ReaderAt, io.Seeker, io.WriterTo,
+// io.ByteScanner, and io.RuneScanner interfaces by reading
+// from a string.
+type Reader struct {
+	s        string
+	i        int64 // current reading index
+	prevRune int   // index of previous rune; or < 0
+}

@@ -1,0 +1,11 @@
+// A Conn represents a textual network protocol connection.
+// It consists of a Reader and Writer to manage I/O
+// and a Pipeline to sequence concurrent requests on the connection.
+// These embedded types carry methods with them;
+// see the documentation of those types for details.
+type Conn struct {
+	Reader
+	Writer
+	Pipeline
+	conn io.ReadWriteCloser
+}

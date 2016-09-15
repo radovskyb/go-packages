@@ -1,0 +1,2 @@
+To view all registered rpc methods, run the server and go to:
+http://localhost:9000/debug/rpc (shows all method names and how many times each method has been called)
