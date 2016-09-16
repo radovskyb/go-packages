@@ -69,15 +69,14 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	// Close the response body after it's been read
+	defer resp.Body.Close()
 
 	// Read the response's body from the response
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatalln(err)
 	}
-
-	// Close the response body after it's been read
-	resp.Body.Close()
 
 	// Print out the response body as a string
 	fmt.Println(string(body))
