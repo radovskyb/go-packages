@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"hash/crc64"
+	"log"
 )
 
 // http://golang.org/pkg/hash/crc64/#pkg-constants
@@ -26,18 +27,27 @@ func main() {
 
 	hasher := crc64.New(crcTable)
 
-	hasher.Write([]byte("Hello, World!"))
+	_, err := hasher.Write([]byte("Hello, World!"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 	fmt.Printf("\nHash64 value: %x\n", hasher.Sum64())
 
 	// Reset resets the Hash to its initial state.
 	hasher.Reset()
 
-	hasher.Write([]byte("Hello!"))
+	_, err = hasher.Write([]byte("Hello!"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 	fmt.Printf("Hash64 value: %x\n", hasher.Sum64())
 
 	hasher.Reset()
 
-	hasher.Write([]byte("Hello, World!"))
+	_, err = hasher.Write([]byte("Hello, World!"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 	fmt.Printf("Hash64 value: %x\n", hasher.Sum64())
 
 	// Update:

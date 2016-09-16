@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"hash/crc32"
 	"io"
+	"log"
 )
 
 // see http://golang.org/pkg/hash/crc32/#pkg-constants
@@ -23,7 +24,10 @@ func main() {
 	// using the polynomial represented by the Table.
 	crc := crc32.New(castagnoliTable)
 
-	crc.Write([]byte("Hello, World!"))
+	_, err := crc.Write([]byte("Hello, World!"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	fmt.Printf("Sum32: %x\n", crc.Sum32())
 
@@ -36,13 +40,19 @@ func main() {
 	// NewIEEE:
 
 	crcIEEE := crc32.NewIEEE()
-	crcIEEE.Write([]byte("Hello, World!"))
+	_, err = crcIEEE.Write([]byte("Hello, World!"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 	fmt.Printf("crcIEEE Sum32: %x\n", crcIEEE.Sum32())
 
 	// Reset resets the Hash to its initial state.
 	crcIEEE.Reset()
 
-	io.WriteString(crcIEEE, "Hello") // alternative way to write
+	_, err = io.WriteString(crcIEEE, "Hello") // alternative way to write
+	if err != nil {
+		log.Fatalln(err)
+	}
 	fmt.Printf("Sum32 after reset and new write: %x\n", crcIEEE.Sum32())
 
 	// ChecksumIEEE:

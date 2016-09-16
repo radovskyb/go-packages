@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"hash/fnv"
+	"log"
 )
 
 func main() {
@@ -16,7 +17,10 @@ func main() {
 	hasher1 := fnv.New32()
 
 	// Write a []byte to `hasher1`
-	hasher1.Write([]byte("Password123"))
+	_, err := hasher1.Write([]byte("Password123"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the encrypted []byte from above
 	//
@@ -34,7 +38,10 @@ func main() {
 	hasher2 := fnv.New32a()
 
 	// Write a []byte to `hasher2`
-	hasher2.Write([]byte("Password123"))
+	_, err = hasher2.Write([]byte("Password123"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the encrypted []byte from above
 	//
@@ -70,7 +77,10 @@ func main() {
 	hasher4 := fnv.New64a()
 
 	// Write a []byte to `hasher4`
-	hasher4.Write([]byte("Password123"))
+	_, err = hasher4.Write([]byte("Password123"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the encrypted []byte from above
 	//

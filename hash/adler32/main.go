@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"hash/adler32"
+	"log"
 )
 
 func main() {
@@ -13,7 +14,10 @@ func main() {
 	hasher := adler32.New()
 
 	// Write a []byte to `hasher`
-	hasher.Write([]byte("Password123"))
+	_, err := hasher.Write([]byte("Password123"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the encrypted []byte from above
 	//
