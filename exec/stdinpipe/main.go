@@ -19,7 +19,10 @@ func main() {
 	}
 
 	// Write the byte slice `Benji` in to the standard input pipe
-	stdinpipe.Write([]byte("Benji"))
+	_, err = stdinpipe.Write([]byte("Benji"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Now close the pipe so that the input will be received on the
 	// other end of the pipe because the command being run will not
@@ -31,7 +34,9 @@ func main() {
 	// call Close to force the pipe to close sooner. For example, if the
 	// command being run will not exit until standard input is closed,
 	// the caller must close the pipe.
-	stdinpipe.Close()
+	if err := stdinpipe.Close(); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Now run cmd.CombinedOutput() to return both the standard output
 	// and standard error intot the byte slice output and if there are

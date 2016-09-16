@@ -31,13 +31,18 @@ func main() {
 	}
 
 	// Start the command
-	cmd.Start()
+	if err := cmd.Start(); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Create a new bytes buffer to store the output of the command
 	var buf bytes.Buffer
 
 	// Copy the contents from stdout into bytes buffer buf
-	io.Copy(&buf, stdout)
+	_, err = io.Copy(&buf, stdout)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Now that everything needed has been read from stdout, call wait
 	// on the command and check if any errors occured whilst calling it

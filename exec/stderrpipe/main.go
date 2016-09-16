@@ -38,11 +38,14 @@ func main() {
 	var buf bytes.Buffer
 
 	// Copy from errpipe into buf
-	io.Copy(&buf, errpipe)
+	_, err = io.Copy(&buf, errpipe)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Run wait on cmd now errpipe has finished being read from
 	if err := cmd.Wait(); err != nil {
-		log.Fatalln()
+		log.Fatalln(err)
 	}
 
 	// Check if buf is empy and if so print a message that it was empty
