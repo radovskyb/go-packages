@@ -36,7 +36,9 @@ func main() {
 		}
 
 		// Close the file handle
-		rc.Close()
+		if err := rc.Close(); err != nil {
+			log.Fatalln(err)
+		}
 
 		fmt.Println("\n")
 	}
