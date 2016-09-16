@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"strings"
 )
 
@@ -25,8 +26,11 @@ func main() {
 	// the returned data does not end in delim.
 	//
 	// For simple uses, a Scanner may be more convenient.
-	b, _ := br.ReadBytes(byte(','))
+	b, err := br.ReadBytes(byte(','))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print the bytes read from br in string form
-	fmt.Println("Read", len(b), "bytes:", string(b)) // Hello,
+	fmt.Printf("Read %d bytes: %s\n", len(b), b) // Hello,
 }

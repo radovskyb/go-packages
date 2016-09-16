@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"log"
 	"os"
 )
 
@@ -15,8 +16,12 @@ func main() {
 	// Use w.WriteByte to write a single byte into w's buffer
 	//
 	// WriteByte writes a single byte.
-	w.WriteByte([]byte(s)[0])
+	if err := w.WriteByte([]byte(s)[0]); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Flush w to actually write w's contents to os.Stdout
-	w.Flush()
+	if err := w.Flush(); err != nil {
+		log.Fatalln(err)
+	}
 }

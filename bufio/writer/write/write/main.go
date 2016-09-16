@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"log"
 	"os"
 )
 
@@ -17,8 +18,13 @@ func main() {
 	// Write writes the contents of p into the buffer. It returns
 	// the number of bytes written. If nn < len(p), it also returns
 	// an error explaining why the write is short.
-	w.Write([]byte(s))
+	_, err := w.Write([]byte(s))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Flush w to actually write w's contents to os.Stdout
-	w.Flush()
+	if err := w.Flush(); err != nil {
+		log.Fatalln(err)
+	}
 }

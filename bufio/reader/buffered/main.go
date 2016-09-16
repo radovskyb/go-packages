@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"strings"
 )
 
@@ -15,7 +16,10 @@ func main() {
 	br := bufio.NewReader(strings.NewReader(s))
 
 	// Read from br up until a comma in the string s
-	br.ReadString(byte(',')) // Comma at byte 6
+	_, err := br.ReadString(byte(',')) // Comma at byte 6
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// n = 13 bytes - 6 bytes
 	n := br.Buffered() // n = 7

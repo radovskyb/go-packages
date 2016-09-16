@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"strings"
 )
 
@@ -32,6 +33,11 @@ func main() {
 		// using scanner.Text() with fmt.Println() to place
 		// each word on it's own separate line
 		fmt.Println(scanner.Text())
+	}
+
+	// Check if any scanner errors occured and if so log them
+	if err := scanner.Err(); err != nil {
+		log.Fatalln(err)
 	}
 
 	// Print the number of words that were scanned in from the

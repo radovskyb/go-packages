@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"strings"
 )
 
@@ -15,7 +16,10 @@ func main() {
 	br := bufio.NewReader(strings.NewReader(s))
 
 	// Read one rune into b from br
-	b, _, _ := br.ReadRune()
+	b, _, err := br.ReadRune()
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print that rune
 	fmt.Println(string(b)) // H
@@ -28,10 +32,15 @@ func main() {
 	// operation on the buffer was not a ReadRune, UnreadRune returns
 	// an error. (In this regard it is stricter than UnreadByte, which
 	// will unread the last byte from any read operation.)
-	br.UnreadRune()
+	if err := br.UnreadRune(); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Read a rune from br again
-	b, _, _ = br.ReadRune() // `H` read instead of `e`
+	b, _, err = br.ReadRune() // `H` read instead of `e`
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print the rune again, however
 	// this time it will be back at rune `H`

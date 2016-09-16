@@ -32,8 +32,7 @@ func main() {
 		fmt.Println(fs.Text())
 	}
 
-	// Check if any scanner errors occured
-	// and if so log them
+	// Check if any scanner errors occured and if so log them
 	if err := fs.Err(); err != nil {
 		log.Fatalln(err)
 	}

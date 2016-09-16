@@ -2,13 +2,15 @@ package main
 
 import (
 	"bufio"
+	"fmt"
+	"log"
 	"os"
 	"strings"
 )
 
 func main() {
 	// Create a new string s
-	s := "Hello"
+	s := "Hello\n"
 
 	// Create a new buffered reader br that reads from
 	// a new strings reader that reads from string s
@@ -17,5 +19,10 @@ func main() {
 	// Write the buffered reader br's contents to os.Stdout
 	//
 	// WriteTo implements io.WriterTo.
-	br.WriteTo(os.Stdout)
+	n, err := br.WriteTo(os.Stdout)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	fmt.Printf("Wrote %d bytes\n", n)
 }

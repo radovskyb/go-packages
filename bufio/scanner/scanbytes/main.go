@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
+	"log"
 )
 
 func main() {
@@ -28,5 +29,10 @@ func main() {
 		// Print each token returned from scanner.Scan()
 		// which is stored in scanner.Text()
 		fmt.Println(scanner.Text())
+	}
+
+	// Check if any scanner errors occured and if so log them
+	if err := scanner.Err(); err != nil {
+		log.Fatalln(err)
 	}
 }

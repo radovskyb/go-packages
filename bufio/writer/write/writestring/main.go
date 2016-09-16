@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"log"
 	"os"
 )
 
@@ -17,8 +18,13 @@ func main() {
 	// WriteString writes a string. It returns the number of
 	// bytes written. If the count is less than len(s), it also
 	// returns an error explaining why the write is short.
-	w.WriteString(s)
+	_, err := w.WriteString(s)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Flush w to actually write w's contents to os.Stdout
-	w.Flush()
+	if err := w.Flush(); err != nil {
+		log.Fatalln(err)
+	}
 }

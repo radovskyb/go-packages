@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"strings"
 )
 
@@ -15,13 +16,19 @@ func main() {
 	br := bufio.NewReader(strings.NewReader(s))
 
 	// Read one byte into b from br
-	b, _ := br.ReadByte()
+	b, err := br.ReadByte()
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print that byte
 	fmt.Println(string(b)) // H
 
 	// Read one more into b from br
-	b, _ = br.ReadByte()
+	b, err = br.ReadByte()
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print that next byte
 	fmt.Println(string(b)) // e
@@ -34,7 +41,10 @@ func main() {
 	br.Reset(strings.NewReader(s))
 
 	// Once again read a byte from br
-	b, _ = br.ReadByte()
+	b, err = br.ReadByte()
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Once again print the byte, however
 	// this time it will be back at byte `H`

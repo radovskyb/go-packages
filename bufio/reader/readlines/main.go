@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"strings"
 )
 
@@ -31,7 +32,10 @@ func main() {
 	//
 	// ReadLine is a low-level line-reading primitive. Most callers should use
 	// ReadBytes('\n') or ReadString('\n') instead or use a Scanner.
-	line, _, _ := br.ReadLine()
+	line, _, err := br.ReadLine()
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print the line read from br in string form
 	fmt.Println(string(line)) // Hello, World

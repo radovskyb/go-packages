@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"strings"
 )
 
@@ -19,9 +20,12 @@ func main() {
 	read := make([]byte, len(s))
 
 	// Read from buffered reader br into []byte read
-	br.Read(read) // read is now `Hello, World!`
+	n, err := br.Read(read) // read is now `Hello, World!`
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print []byte read as a string which will print
 	// what was read using the buffered reader br
-	fmt.Println(string(read))
+	fmt.Printf("Read %d bytes: %s\n", n, read)
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"log"
 	"os"
 )
 
@@ -16,8 +17,13 @@ func main() {
 	//
 	// WriteRune writes a single Unicode code point, returning
 	// the number of bytes written and any error.
-	w.WriteRune([]rune(s)[0])
+	_, err := w.WriteRune([]rune(s)[0])
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Flush w to actually write w's contents to os.Stdout
-	w.Flush()
+	if err := w.Flush(); err != nil {
+		log.Fatalln(err)
+	}
 }

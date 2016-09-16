@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"strings"
 )
 
@@ -24,7 +25,10 @@ func main() {
 	// If Peek returns fewer than n bytes, it also returns an error
 	// explaining why the read is short. The error is ErrBufferFull
 	// if n is larger than b's buffer size.
-	peeked, _ := br.Peek(5)
+	peeked, err := br.Peek(5)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the byte slice returned from using
 	// br.Peek(5), as a string

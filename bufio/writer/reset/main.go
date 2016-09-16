@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
 )
 
@@ -32,5 +33,7 @@ func main() {
 	//
 	// Flush writes any buffered data to the underlying io.Writer
 	// by actually calling the writers Write() method
-	w.Flush()
+	if err := w.Flush(); err != nil {
+		log.Fatalln(err)
+	}
 }

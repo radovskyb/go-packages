@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"io"
+	"log"
 	"os"
 	"strings"
 )
@@ -25,10 +26,14 @@ func main() {
 	// Use io.Copy to copy from rw to rw, which will use
 	// rw's buffered writer and rw's buffered reader
 	// as its parameters respectively
-	io.Copy(rw, rw)
+	if _, err := io.Copy(rw, rw); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Now to make sure that w actually writes to os.Stdout,
 	// we need to call Flush() on rw which will push anything
 	// inside of rw's writer to os.Stdout
-	rw.Flush()
+	if err := rw.Flush(); err != nil {
+		log.Fatalln(err)
+	}
 }

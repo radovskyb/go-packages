@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"strings"
 )
 
@@ -26,7 +27,10 @@ func main() {
 	// ReadSlice will be overwritten by the next I/O operation, most clients should
 	// use ReadBytes or ReadString instead. ReadSlice returns err != nil if and
 	// only if line does not end in delim.
-	b, _ := br.ReadSlice(byte(','))
+	b, err := br.ReadSlice(byte(','))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print the byte slice read from br in string form
 	fmt.Println("Read", len(b), "bytes:", string(b)) // Hello,

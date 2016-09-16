@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"strings"
 )
 
@@ -20,8 +21,11 @@ func main() {
 	// returns the rune and its size in bytes. If the encoded rune
 	// is invalid, it consumes one byte and returns
 	// unicode.ReplacementChar (U+FFFD) with a size of 1.
-	r, size, _ := br.ReadRune()
+	r, size, err := br.ReadRune()
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print the rune read from br in string form
-	fmt.Println("Read", string(r), "which is", size, "byte/s long") // H
+	fmt.Printf("Read %c which is %d byte/s long\n", r, size) // H
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"strings"
 )
 
@@ -15,7 +16,10 @@ func main() {
 	br := bufio.NewReader(strings.NewReader(s))
 
 	// Read one byte into b from br
-	b, _ := br.ReadByte()
+	b, err := br.ReadByte()
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print that byte
 	fmt.Println(string(b)) // H
@@ -26,10 +30,15 @@ func main() {
 	//
 	// UnreadByte unreads the last byte. Only the most
 	// recently read byte can be unread.
-	br.UnreadByte()
+	if err := br.UnreadByte(); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Read a byte from br again
-	b, _ = br.ReadByte() // `H` read instead of `e`
+	b, err = br.ReadByte() // `H` read instead of `e`
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print the byte again, however
 	// this time it will be back at byte `H`

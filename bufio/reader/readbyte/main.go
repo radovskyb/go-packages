@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"strings"
 )
 
@@ -18,7 +19,10 @@ func main() {
 	//
 	// ReadByte reads and returns a single byte.
 	// If no byte is available, returns an error.
-	b, _ := br.ReadByte()
+	b, err := br.ReadByte()
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print the byte read from br in string form
 	fmt.Println(string(b)) // H
