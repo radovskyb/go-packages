@@ -25,7 +25,9 @@ func main() {
 	// order, which makes the output deterministic but means that for very
 	// large directories Walk can be inefficient.
 	// Walk does not follow symbolic links.
-	filepath.Walk(curwd, walkFn)
+	if err := filepath.Walk(curwd, walkFn); err != nil {
+		log.Fatalln(err)
+	}
 }
 
 // Create a function that implements the WalkFunc interface type that for each
