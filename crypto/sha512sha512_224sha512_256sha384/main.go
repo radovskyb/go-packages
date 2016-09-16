@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/sha512"
 	"fmt"
+	"log"
 )
 
 func main() {
@@ -16,7 +17,10 @@ func main() {
 	h1 := sha512.New()
 
 	// Write a string to `h1`
-	h1.Write([]byte("Password123"))
+	_, err := h1.Write([]byte("Password123"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the sha512 encrypted string from above
 	//
@@ -38,7 +42,10 @@ func main() {
 	h2 := sha512.New512_224()
 
 	// Write a string to `h2`
-	h2.Write([]byte("Password123"))
+	_, err = h2.Write([]byte("Password123"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the sha512_224 encrypted string from above
 	//
@@ -82,7 +89,10 @@ func main() {
 	h4 := sha512.New384()
 
 	// Write a string to `h4`
-	h4.Write([]byte("Password123"))
+	_, err = h4.Write([]byte("Password123"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the sha384 encrypted string from above
 	//

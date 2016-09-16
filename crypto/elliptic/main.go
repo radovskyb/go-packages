@@ -32,7 +32,6 @@ func main() {
 	// GenerateKey returns a public/private key pair. The private key is
 	// generated using the given reader, which must return random data.
 	priv, x, y, err = elliptic.GenerateKey(elliptic.P224(), rand.Reader)
-
 	if err != nil {
 		fmt.Println(err)
 	}

@@ -39,7 +39,9 @@ func main() {
 	//
 	// GenerateKey generates a public&private key pair. The Parameters of the
 	// PrivateKey must already be valid (see GenerateParameters).
-	dsa.GenerateKey(privatekey, rand.Reader)
+	if err := dsa.GenerateKey(privatekey, rand.Reader); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Create a new DSA public key variable `publickey`
 	//
@@ -61,7 +63,10 @@ func main() {
 	r := big.NewInt(0)
 	s := big.NewInt(0)
 
-	io.WriteString(h, "This is the message to be signed and verified!")
+	_, err := io.WriteString(h, "This is the message to be signed and verified!")
+	if err != nil {
+		log.Fatalln(err)
+	}
 	signhash := h.Sum(nil)
 
 	// Sign signs an arbitrary length hash (which should be the result
@@ -72,7 +77,7 @@ func main() {
 	// Note that FIPS 186-3 section 4.6 specifies that the hash should
 	// be truncated to the byte-length of the subgroup. This function
 	// does not perform that truncation itself.
-	r, s, err := dsa.Sign(rand.Reader, privatekey, signhash)
+	r, s, err = dsa.Sign(rand.Reader, privatekey, signhash)
 	if err != nil {
 		log.Fatalln("Sign error:", err)
 	}
@@ -94,7 +99,10 @@ func main() {
 	fmt.Printf("\n`verifystatus`: %t\n", verifystatus) // true
 
 	// we add additional data to change the signhash
-	io.WriteString(h, "This message is NOT to be signed and verified!")
+	_, err = io.WriteString(h, "This message is NOT to be signed and verified!")
+	if err != nil {
+		log.Fatalln(err)
+	}
 	signhash = h.Sum(nil)
 
 	verifystatus = dsa.Verify(&publickey, signhash, r, s)

@@ -4,6 +4,7 @@ import (
 	"crypto/md5"
 	"fmt"
 	"io"
+	"log"
 )
 
 func main() {
@@ -13,7 +14,10 @@ func main() {
 	h := md5.New()
 
 	// Write a string into `h`
-	io.WriteString(h, "Password123")
+	_, err := io.WriteString(h, "Password123")
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the md5 encrypted string from above
 	fmt.Printf("%x\n", h.Sum(nil))

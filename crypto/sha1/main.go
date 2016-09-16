@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/sha1"
 	"fmt"
+	"log"
 )
 
 func main() {
@@ -12,7 +13,10 @@ func main() {
 	h := sha1.New()
 
 	// Write a string to `h`
-	h.Write([]byte("Password123"))
+	_, err := h.Write([]byte("Password123"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the sha1 encrypted string from above
 	//

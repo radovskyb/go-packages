@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"hash"
 	"io"
+	"log"
 	"math/big"
-	"os"
 )
 
 func main() {
@@ -23,10 +23,8 @@ func main() {
 	//
 	// GenerateKey generates a public and private key pair.
 	privatekey, err := ecdsa.GenerateKey(pubkeyCurve, rand.Reader)
-
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		log.Fatalln(err)
 	}
 
 	// PublicKey represents an ECDSA public key.
@@ -46,7 +44,10 @@ func main() {
 	r := big.NewInt(0)
 	s := big.NewInt(0)
 
-	io.WriteString(h, "This is a message to be signed and verified by ECDSA!")
+	_, err = io.WriteString(h, "This is a message to be signed and verified by ECDSA!")
+	if err != nil {
+		log.Fatalln(err)
+	}
 	signhash := h.Sum(nil)
 
 	// Sign signs an arbitrary length hash (which should be the result
@@ -55,8 +56,7 @@ func main() {
 	// of the private key depends on the entropy of rand.
 	r, s, serr := ecdsa.Sign(rand.Reader, privatekey, signhash)
 	if serr != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		log.Fatalln(serr)
 	}
 
 	signature := r.Bytes()
