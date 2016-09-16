@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"log"
 )
 
 func main() {
@@ -18,7 +19,10 @@ func main() {
 	fmt.Println(r.Size()) // 3
 
 	// Read one byte from r
-	r.ReadByte()
+	_, err := r.ReadByte()
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Once again print the size
 	fmt.Println(r.Size()) // 3

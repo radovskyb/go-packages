@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"log"
 	"os"
 )
 
@@ -10,11 +11,19 @@ func main() {
 	r := bytes.NewReader([]byte{'a', 'b', 'c'})
 
 	// Read one rune from r
-	r.ReadRune() // r's contents are now `bc`
+	_, _, err := r.ReadRune() // r's contents are now `bc`
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Now unread the byte that was read before
-	r.UnreadRune() // r's contents are back to `abc`
+	if err := r.UnreadRune(); err != nil { // r's contents are back to `abc`
+		log.Fatalln(err)
+	}
 
 	// Print r's contents
-	r.WriteTo(os.Stdout) // abc
+	_, err = r.WriteTo(os.Stdout) // abc
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"log"
 	"os"
 )
 
@@ -18,7 +19,10 @@ func main() {
 	b = bytes.TrimSuffix(b, []byte("Gopher!"))
 
 	// Write b to os.Stdout
-	os.Stdout.Write(b)
+	_, err := os.Stdout.Write(b)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Write a blank line
 	fmt.Println()
@@ -28,5 +32,8 @@ func main() {
 	b = append(b, bytes.TrimSuffix([]byte(", Gopher!"), []byte("!"))...)
 
 	// Write b to os.Stdout again
-	os.Stdout.Write(b)
+	_, err = os.Stdout.Write(b)
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

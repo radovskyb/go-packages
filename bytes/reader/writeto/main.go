@@ -2,6 +2,8 @@ package main
 
 import (
 	"bytes"
+	"fmt"
+	"log"
 	"os"
 )
 
@@ -10,5 +12,10 @@ func main() {
 	r := bytes.NewReader([]byte{'a', 'b', 'c'})
 
 	// Write r's contents to os.Stdout
-	r.WriteTo(os.Stdout)
+	n, err := r.WriteTo(os.Stdout)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	fmt.Printf("\nWrote %d bytes to os.Stdout\n", n)
 }

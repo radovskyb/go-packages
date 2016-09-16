@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"log"
 	"os"
 )
 
@@ -12,8 +13,14 @@ func main() {
 	// Use r.Seek(1, 1) to place r's position at 1 (byte `b`)
 	//
 	// Seek implements the io.Seeker interface.
-	r.Seek(1, 1)
+	_, err := r.Seek(1, 1)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print r's contents to os.Stdout
-	r.WriteTo(os.Stdout) // bcde
+	_, err = r.WriteTo(os.Stdout) // bcde
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

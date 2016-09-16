@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"log"
 )
 
 func main() {
@@ -13,7 +14,10 @@ func main() {
 	b := make([]byte, 3)
 
 	// Now read from reader r into b with an offset of 1
-	r.ReadAt(b, 1)
+	_, err := r.ReadAt(b, 1)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print the contents of b that were read in from r
 	// Will only print `bc` since the offset was 1
