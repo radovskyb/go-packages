@@ -3,7 +3,6 @@
 // serves as reference to the entire ring. Empty rings are represented
 // as nil Ring pointers. The zero value for a Ring is a one-element
 // ring with a nil Value.
-//
 type Ring struct {
 	next, prev *Ring
 	Value      interface{} // for use by client; untouched by this library
