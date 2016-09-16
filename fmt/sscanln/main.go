@@ -1,16 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+)
 
 func main() {
-	var first, second, third string
+	var first, second string
 
-	fmt.Sscanln("First Second\nThird", &first, &second, &third)
-
-	fmt.Printf("First: %s\nSecond %s\n", first, second)
-
-	if third == "" {
-		fmt.Println("`third` wasn't scanned into since after scanning " +
-			"into second, there was a \\n character.")
+	// Sscanln is similar to Sscan, but stops scanning at a newline and
+	// after the final item there must be a newline or EOF.
+	n, err := fmt.Sscanln("First Second", &first, &second)
+	if err != nil {
+		log.Fatalln(err)
 	}
+	fmt.Printf("Scanned %d words\nFirst: %s\nSecond %s\n", n, first, second)
 }

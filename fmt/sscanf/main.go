@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+)
 
 func main() {
 	var title string
@@ -10,7 +13,10 @@ func main() {
 	// values into successive arguments as determined by the format.  It
 	// returns the number of items successfully parsed.
 	// Newlines in the input must match newlines in the format.
-	fmt.Sscanf("Number: 5", "%s%d", &title, &number)
+	_, err := fmt.Sscanf("Number: 5", "%s%d", &title, &number)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	fmt.Println(title, number)
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"strings"
 )
 
@@ -19,7 +20,10 @@ func main() {
 	// values into successive arguments.  Newlines count as space.  It
 	// returns the number of items successfully scanned.  If that is less
 	// than the number of arguments, err will report why.
-	fmt.Fscan(strings.NewReader("5 String 1"), &obj.FieldOne, &obj.FieldTwo, &i)
+	_, err := fmt.Fscan(strings.NewReader("5 String 1"), &obj.FieldOne, &obj.FieldTwo, &i)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	fmt.Println(obj.FieldOne)
 	fmt.Println(obj.FieldTwo)
