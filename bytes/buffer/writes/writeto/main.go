@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"log"
 	"os"
 )
 
@@ -10,7 +11,10 @@ func main() {
 	buf := bytes.NewBuffer([]byte{'a', 'b', 'c'})
 
 	// Append a string to buf
-	buf.WriteString("defghijk")
+	_, err := buf.WriteString("defghijk")
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Write buf to os.Stdout
 	//
@@ -18,5 +22,8 @@ func main() {
 	// occurs. The return value n is the number of bytes written; it always
 	// fits into an int, but it is int64 to match the io.WriterTo
 	// interface. Any error encountered during the write is also returned.
-	buf.WriteTo(os.Stdout) // abcdefghijk
+	_, err = buf.WriteTo(os.Stdout) // abcdefghijk
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

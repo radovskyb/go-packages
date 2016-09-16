@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"log"
 )
 
 func main() {
@@ -17,7 +18,10 @@ func main() {
 	//
 	// ReadByte reads and returns the next byte from the
 	// buffer. If no byte is available, it returns error io.EOF.
-	b, _ := buf.ReadByte()
+	b, err := buf.ReadByte()
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out b as a string
 	fmt.Println(string(b))

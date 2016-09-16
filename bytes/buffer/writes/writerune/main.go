@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"log"
 )
 
 func main() {
@@ -19,7 +20,10 @@ func main() {
 	// nil but is included to match bufio.Writer's WriteRune. The buffer
 	// is grown as needed; if it becomes too large, WriteRune will
 	// panic with ErrTooLarge.
-	buf.WriteRune('d')
+	_, err := buf.WriteRune('d')
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Once again print buf's contents
 	fmt.Println(buf) // abcd

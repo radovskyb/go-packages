@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"io"
+	"log"
 	"os"
 )
 
@@ -22,5 +23,8 @@ func main() {
 	buf := bytes.NewBufferString(input)
 
 	// Copy the read contents from our buf reader to os.Stdout
-	io.Copy(os.Stdout, buf)
+	_, err := io.Copy(os.Stdout, buf)
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

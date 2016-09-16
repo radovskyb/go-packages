@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"log"
 )
 
 func main() {
@@ -18,7 +19,9 @@ func main() {
 	// as needed. The returned error is always nil, but is included to
 	// match bufio.Writer's WriteByte. If the buffer becomes too large,
 	// WriteByte will panic with ErrTooLarge.
-	buf.WriteByte(byte('d'))
+	if err := buf.WriteByte(byte('d')); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Once again print buf's contents
 	fmt.Println(buf) // abcd

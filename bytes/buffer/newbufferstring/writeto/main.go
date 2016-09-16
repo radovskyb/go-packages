@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"log"
 	"os"
 )
 
@@ -20,5 +21,8 @@ func main() {
 	b := bytes.NewBufferString(s)
 
 	// Write the bytes buffer b to os.Stdout
-	b.WriteTo(os.Stdout)
+	_, err := b.WriteTo(os.Stdout)
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

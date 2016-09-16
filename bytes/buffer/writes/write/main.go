@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"log"
 )
 
 func main() {
@@ -18,8 +19,11 @@ func main() {
 	// the buffer as needed. The return value n is the length
 	// of p; err is always nil. If the buffer becomes too large,
 	// Write will panic with ErrTooLarge.
-	buf.Write([]byte{'d', 'e', 'f'})
+	n, err := buf.Write([]byte{'d', 'e', 'f'})
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Once again print buf's contents
-	fmt.Println(buf) // abcdef
+	fmt.Printf("Wrote %d bytes: %s", n, buf) // abcdef
 }

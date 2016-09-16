@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"log"
 )
 
 func main() {
@@ -22,8 +23,11 @@ func main() {
 	// the buffer is drained. The return value n is the number of
 	// bytes read. If the buffer has no data to return, err is
 	// io.EOF (unless len(p) is zero); otherwise it is nil.
-	buf.Read(b)
+	n, err := buf.Read(b)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the results of buf.Read into byte slice b
-	fmt.Println(string(b))
+	fmt.Printf("Read %d bytes: %s", n, b)
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"log"
 	"os"
 )
 
@@ -12,7 +13,10 @@ func main() {
 
 	// Write the string `Hello!` as a byte array
 	// to the byte buffer b
-	b.Write([]byte("Hello "))
+	_, err := b.Write([]byte("Hello "))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Now write the string "World!" into the byte buffer b,
 	// using Fprintln, which accepts an io.Writer and a string
@@ -22,5 +26,8 @@ func main() {
 	// Now we write the contents of b to os.Stdout using b
 	// which is itself a writer so contains the method
 	// WriteTo, which takes an io.Writer to write to
-	b.WriteTo(os.Stdout)
+	_, err = b.WriteTo(os.Stdout)
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"log"
 )
 
 func main() {
@@ -18,7 +19,10 @@ func main() {
 	// the buffer as needed. The return value n is the length of s;
 	// err is always nil. If the buffer becomes too large, WriteString
 	// will panic with ErrTooLarge.
-	buf.WriteString("defghijk")
+	_, err := buf.WriteString("defghijk")
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Once again print buf's contents
 	fmt.Println(buf) // abcdefghijk

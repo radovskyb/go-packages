@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"log"
 )
 
 func main() {
@@ -19,8 +20,11 @@ func main() {
 	// code point from the buffer. If no bytes are available, the error
 	// returned is io.EOF. If the bytes are an erroneous UTF-8 encoding,
 	// it consumes one byte and returns U+FFFD, 1.
-	b, size, _ := buf.ReadRune()
+	b, size, err := buf.ReadRune()
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out b as a string
-	fmt.Print("Read in: ", string(b), "\nSize in bytes: ", size)
+	fmt.Printf("Read in: %c\nSize in bytes %d\n", b, size)
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"log"
 )
 
 func main() {
@@ -11,7 +12,10 @@ func main() {
 	buf := bytes.NewBuffer([]byte{'a', 'b', 'c', 'd', 'e'})
 
 	// Read one byte from buf
-	buf.ReadByte() // Reads `a`
+	_, err := buf.ReadByte() // Reads `a`
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print the remaining contents using buf.String()
 	//

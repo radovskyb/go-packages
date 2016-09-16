@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"log"
 )
 
 func main() {
@@ -22,8 +23,11 @@ func main() {
 	// a delimiter, it returns the data read before the error and the error
 	// itself (often io.EOF). ReadString returns err != nil if and only
 	// if the returned data does not end in delim.
-	b, _ := buf.ReadString(byte(','))
+	line, err := buf.ReadString(byte(','))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
-	// Print out b
-	fmt.Println(b)
+	// Print out line
+	fmt.Println(line)
 }

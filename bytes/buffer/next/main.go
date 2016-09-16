@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"log"
 	"os"
 )
 
@@ -28,5 +29,8 @@ func main() {
 	fmt.Println(string(buf.Next(10))) // cdefghijkl
 
 	// Write the rest of the buffer out to os.Stdout
-	buf.WriteTo(os.Stdout) // mnopqrstuv
+	_, err := buf.WriteTo(os.Stdout) // mnopqrstuv
+	if err != nil {
+		log.Fatalln(err)
+	}
 }
