@@ -79,7 +79,9 @@ func main() {
 	// to exported (upper case) fields.  Unmarshal uses a case-sensitive
 	// comparison to match XML element names to tag values and struct
 	// field names.
-	xml.Unmarshal(marshalled, &unmarshalled)
+	if err := xml.Unmarshal(marshalled, &unmarshalled); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out Person `unmarshalled`
 	fmt.Println(unmarshalled)

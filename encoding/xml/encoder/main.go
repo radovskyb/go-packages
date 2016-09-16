@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/xml"
+	"log"
 	"os"
 )
 
@@ -39,5 +40,7 @@ func main() {
 	// of Go values to XML.
 	//
 	// Encode calls Flush before returning.
-	encoder.Encode(p)
+	if err := encoder.Encode(p); err != nil {
+		log.Fatalln(err)
+	}
 }

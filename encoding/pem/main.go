@@ -23,6 +23,9 @@ func main() {
 
 	// Generate an rsa.PrivateKey use rsa.Generate of size 1024 bytes
 	privatekey, err = rsa.GenerateKey(rand.Reader, 1024)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Create a new pem Block object to use with pem.Encode
 	//
@@ -49,10 +52,14 @@ func main() {
 	fmt.Println()
 
 	// Encode pemkey as a pem dataencoding into pemfile file
-	pem.Encode(pemfile, pemkey)
+	if err := pem.Encode(pemfile, pemkey); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Close the file handle to pemfile
-	pemfile.Close()
+	if err := pemfile.Close(); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Now that the file has been written and the file
 	// handle is closed, reopen the file and read all of

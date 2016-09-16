@@ -23,10 +23,15 @@ func main() {
 	encoderstream := ascii85.NewEncoder(&buf)
 
 	// Write a byte slice to the encoderstream
-	encoderstream.Write([]byte("Hello, World!"))
+	_, err := encoderstream.Write([]byte("Hello, World!"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Close the stream now that writing is finished
-	encoderstream.Close()
+	if err := encoderstream.Close(); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the encoded string inside of buf
 	fmt.Println(buf.String())

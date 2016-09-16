@@ -38,8 +38,13 @@ func main() {
 	// writing, the caller must Close the returned encoder to flush any
 	// partially written blocks.
 	encoder := base32.NewEncoder(base32.StdEncoding, os.Stdout)
-	encoder.Write([]byte("Hello, World!"))
-	encoder.Close()
+	_, err = encoder.Write([]byte("Hello, World!"))
+	if err != nil {
+		log.Fatalln(err)
+	}
+	if err := encoder.Close(); err != nil {
+		log.Fatalln(err)
+	}
 
 	// NewReader returns a new Reader reading from s.
 	// It is similar to bytes.NewBufferString but more efficient
@@ -48,6 +53,11 @@ func main() {
 
 	// NewDecoder constructs a new base32 stream decoder.
 	decoder := base32.NewDecoder(base32.StdEncoding, sr)
+
 	fmt.Println()
-	io.Copy(os.Stdout, decoder)
+
+	_, err = io.Copy(os.Stdout, decoder)
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

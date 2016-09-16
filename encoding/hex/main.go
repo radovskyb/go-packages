@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/hex"
 	"fmt"
+	"log"
 	"os"
 )
 
@@ -51,10 +52,13 @@ func main() {
 	//
 	// If Decode encounters invalid input, it returns an
 	// error describing the failure.
-	hex.Decode(decodeBuf, []byte(strBufEncode))
+	decoded, err := hex.Decode(decodeBuf, []byte(strBufEncode))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out decodeBuf as a string
-	fmt.Println(string(decodeBuf))
+	fmt.Printf("Decoded %d bytes: %s\n", decoded, decodeBuf)
 
 	// Now decode strBufEncode into a []byte using hex.DecodeString
 	//
@@ -88,8 +92,13 @@ func main() {
 
 	// Write a byte slice to hex.Dumper dumper which
 	// will print a hex dump of the byte slice to os.Stdout
-	dumper.Write([]byte("Hello, World!"))
+	_, err = dumper.Write([]byte("Hello, World!"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Close the dumper now that we are finished with it
-	dumper.Close()
+	if err := dumper.Close(); err != nil {
+		log.Fatalln(err)
+	}
 }

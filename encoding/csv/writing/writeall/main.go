@@ -23,7 +23,9 @@ func main() {
 	//
 	// WriteAll writes multiple CSV records to w using Write
 	// and then calls Flush.
-	w.WriteAll(records)
+	if err := w.WriteAll(records); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Check if w contains any errors and if so, log them
 	if err := w.Error(); err != nil {

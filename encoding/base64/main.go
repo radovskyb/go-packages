@@ -43,8 +43,13 @@ func main() {
 		base64.StdEncoding,
 		&buf,
 	)
-	encoder.Write([]byte("Hello, World!"))
-	encoder.Close()
+	_, err = encoder.Write([]byte("Hello, World!"))
+	if err != nil {
+		log.Fatalln(err)
+	}
+	if err := encoder.Close(); err != nil {
+		log.Fatalln(err)
+	}
 
 	fmt.Println(buf.String())
 
@@ -54,7 +59,10 @@ func main() {
 		&buf,
 	)
 
-	io.Copy(os.Stdout, decoder)
+	_, err = io.Copy(os.Stdout, decoder)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	fmt.Println("\n")
 

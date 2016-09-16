@@ -37,8 +37,13 @@ func main() {
 	// The data appended to dst does not begin with the prefix nor
 	// any indentation, and has no trailing newline, to make it
 	// easier to embed inside other formatted JSON data.
-	json.Indent(dst, b, "", "\t")
+	if err := json.Indent(dst, b, "", "\t"); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out dst's contents to os.Stdout
-	dst.WriteTo(os.Stdout)
+	_, err = dst.WriteTo(os.Stdout)
+	if err != nil {
+		log.Fatalln(err)
+	}
 }
