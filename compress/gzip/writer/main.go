@@ -40,7 +40,9 @@ func main() {
 
 	// Close closes the Writer, flushing any unwritten data to the underlying
 	// io.Writer, but does not close the underlying io.Writer.
-	gzipWriter.Close()
+	if err := gzipWriter.Close(); err != nil {
+		log.Fatalln(err)
+	}
 
 	fmt.Println("Compressed", n, "bytes into fout")
 }

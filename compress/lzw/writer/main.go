@@ -38,5 +38,7 @@ func main() {
 	fmt.Println("Wrote", n, "bytes to fout")
 
 	// Close lzwWriter
-	lzwWriter.Close()
+	if err := lzwWriter.Close(); err != nil {
+		log.Fatalln(err)
+	}
 }

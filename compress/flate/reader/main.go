@@ -32,5 +32,8 @@ func main() {
 
 	// Copy the compressed data from fin, to os.Stdout in
 	// non-compressed format.
-	io.Copy(os.Stdout, flateReader)
+	_, err = io.Copy(os.Stdout, flateReader)
+	if err != nil {
+		log.Fatalln(err)
+	}
 }
