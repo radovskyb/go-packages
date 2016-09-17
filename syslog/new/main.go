@@ -22,7 +22,10 @@ func main() {
 	defer wLogger.Close()
 
 	// Write a message to the system logger through wLogger
-	wLogger.Write([]byte("Hello, wLogger"))
+	_, err = wLogger.Write([]byte("Hello, wLogger"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// To see the logged output open /var/log/system.log
 }
