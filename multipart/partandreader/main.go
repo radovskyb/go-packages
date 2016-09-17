@@ -67,7 +67,9 @@ func main() {
 			fmt.Printf("Part %q: %q\n", p.Header.Get("Foo"), slurp)
 
 			// Close the part
-			p.Close()
+			if err := p.Close(); err != nil {
+				log.Fatalln(err)
+			}
 		}
 	}
 }

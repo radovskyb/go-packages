@@ -16,7 +16,10 @@ var t = template.Must(template.ParseFiles("index.html"))
 func Handler(w http.ResponseWriter, r *http.Request) {
 	mw := io.MultiWriter(os.Stdout, w)
 
-	t.Execute(w, nil)
+	if err := t.Execute(w, nil); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
 	if r.Method == "POST" {
 		// ParseMultipartForm parses a request body as multipart/form-data.
@@ -26,7 +29,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		// ParseMultipartForm calls ParseForm if necessary.
 		// After one call to ParseMultipartForm, subsequent calls have no effect.
 		if err := r.ParseMultipartForm(200000); err != nil {
-			fmt.Fprintln(mw, err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
@@ -49,7 +52,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			// Open opens and returns the FileHeader's associated File.
 			file, err := fileHeaders[i].Open()
 			if err != nil {
-				fmt.Fprintln(mw, err)
+				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
 			}
 			defer file.Close()
@@ -60,7 +63,11 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			outFile, err := os.Create("uploads/" + fileHeaders[i].Filename)
 			if err != nil {
 				fmt.Fprintln(mw, "Unable to create the file for writing. Check your write access privilege.\n")
-				w.Write([]byte("<br />"))
+				_, err = w.Write([]byte("<br />"))
+				if err != nil {
+					http.Error(w, err.Error(), http.StatusInternalServerError)
+					return
+				}
 				return
 			}
 			defer outFile.Close()
@@ -68,12 +75,16 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 			// Store the file
 			_, err = io.Copy(outFile, file)
 			if err != nil {
-				fmt.Fprintln(mw, err)
+				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
 			}
 
 			fmt.Fprintf(mw, "%s uploaded successfully!\n\n", fileHeaders[i].Filename)
-			w.Write([]byte("<br />"))
+			_, err = w.Write([]byte("<br />"))
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
 		}
 	}
 }
@@ -95,7 +106,7 @@ func main() {
 	}()
 
 	http.HandleFunc("/", Handler)
-	log.Fatalln(http.ListenAndServe(":9000", nil))
+	log.Fatal(http.ListenAndServe(":9000", nil))
 }
 
 func GracefulExit() {
@@ -104,5 +115,5 @@ func GracefulExit() {
 		log.Fatalln(err)
 	}
 
-	fmt.Println("Removed uploads directory and all of it's contents.")
+	fmt.Println("\nRemoved uploads directory and all of it's contents.\n")
 }

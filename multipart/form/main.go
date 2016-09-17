@@ -7,7 +7,10 @@ import (
 )
 
 func Handler(w http.ResponseWriter, r *http.Request) {
-	r.ParseMultipartForm(10000)
+	if err := r.ParseMultipartForm(10000); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
 	formData := r.MultipartForm
 
@@ -24,5 +27,5 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", Handler)
-	log.Fatalln(http.ListenAndServe(":9000", nil))
+	log.Fatal(http.ListenAndServe(":9000", nil))
 }
