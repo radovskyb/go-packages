@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"os"
+	"log"
 	"strconv"
 	"time"
 )
@@ -11,10 +11,8 @@ func main() {
 	unixTimeStamp := "1432572732" // generate with Unix/Linux command >date +%s
 
 	unixIntValue, err := strconv.ParseInt(unixTimeStamp, 10, 64)
-
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		log.Fatalln(err)
 	}
 
 	// Unix returns the local Time corresponding to the given Unix time,

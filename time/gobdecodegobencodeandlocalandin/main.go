@@ -2,11 +2,15 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"time"
 )
 
 func main() {
-	loc, _ := time.LoadLocation("America/New_York")
+	loc, err := time.LoadLocation("America/New_York")
+	if err != nil {
+		log.Fatalln(err)
+	}
 	t := time.Date(2015, 8, 6, 0, 0, 0, 0, loc)
 
 	fmt.Println("Time:", t)

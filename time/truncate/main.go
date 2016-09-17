@@ -2,11 +2,15 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"time"
 )
 
 func main() {
-	t, _ := time.Parse("2006 Jan 02 15:04:05", "2012 Dec 07 12:15:30.918273645")
+	t, err := time.Parse("2006 Jan 02 15:04:05", "2012 Dec 07 12:15:30.918273645")
+	if err != nil {
+		log.Fatalln(err)
+	}
 	trunc := []time.Duration{
 		time.Nanosecond,
 		time.Microsecond,
