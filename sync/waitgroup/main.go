@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"sync"
 )
@@ -46,7 +47,10 @@ func main() {
 			defer wg.Done()
 
 			// Fetch the URL.
-			http.Get(url)
+			_, err := http.Get(url)
+			if err != nil {
+				log.Fatalln(err)
+			}
 		}(url)
 	}
 

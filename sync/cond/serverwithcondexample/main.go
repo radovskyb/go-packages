@@ -45,7 +45,7 @@ func (s *Server) Listen(address string) {
 		// then create a new client connection
 		conn, err := ln.Accept()
 		if err != nil {
-			log.Fatalln("Accept error:", err)
+			log.Println("Accept error:", err)
 			continue
 		}
 
@@ -69,13 +69,15 @@ func (s *Server) handleClient(conn net.Conn) {
 
 	msg := fmt.Sprintf("Welcome Client %d\n", s.clients)
 
-	mw.Write([]byte(msg))
+	_, err := mw.Write([]byte(msg))
+	if err != nil {
+		log.Fatalln(err)
+	}
 }
 
 func (s *Server) disconnected(conn net.Conn) {
-	err := conn.Close()
-	if err != nil {
-		log.Fatalln("Connection close error:", err)
+	if err := conn.Close(); err != nil {
+		log.Fatalln(err)
 	}
 	s.cond.L.Lock()
 	s.clients--
