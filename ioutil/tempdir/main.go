@@ -28,5 +28,7 @@ func main() {
 	fmt.Printf("%s \n", tmpDirName)
 
 	// Now remove the temporary directory now that we are done with it
-	os.Remove(tmpDirName)
+	if err := os.Remove(tmpDirName); err != nil {
+		log.Fatalln(err)
+	}
 }

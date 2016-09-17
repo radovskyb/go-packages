@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"io/ioutil"
+	"log"
 )
 
 func main() {
@@ -28,7 +29,10 @@ func main() {
 	buf := make([]byte, 7)
 
 	// Use reader to read it's contents into buf
-	reader.Read(buf)
+	_, err := reader.Read(buf)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out buf in string form
 	fmt.Println(string(buf))
