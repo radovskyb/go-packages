@@ -14,7 +14,6 @@ import (
 	// format registration. Will allow "jpeg" format to be decoded as
 	// an unknown image format in the convertToPNG function
 	_ "image/jpeg"
-
 	// Enable two lines below to allow gif and png files to also be
 	// decoded as unknown image formats in the convertToPNG function
 	// _ "image/gif"
@@ -63,5 +62,8 @@ func main() {
 	}
 	defer pf.Close()
 
-	pf.Write(bb.Bytes())
+	_, err = pf.Write(bb.Bytes())
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

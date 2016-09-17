@@ -42,5 +42,7 @@ func main() {
 	defer f.Close()
 
 	// Encode outGif as a gif file and store it in f
-	gif.EncodeAll(f, outGif)
+	if err := gif.EncodeAll(f, outGif); err != nil {
+		log.Fatalln(err)
+	}
 }

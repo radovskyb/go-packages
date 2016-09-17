@@ -22,7 +22,10 @@ func main() {
 	// Draw a gradient on the blank image img
 	drawGradient(img)
 
-	png.Encode(f, img)
+	// Encode m into png image format and store it in f
+	if err := png.Encode(f, img); err != nil {
+		log.Fatalln(err)
+	}
 }
 
 func drawGradient(img *image.RGBA) {

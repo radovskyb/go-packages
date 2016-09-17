@@ -54,5 +54,7 @@ func main() {
 	}
 	defer f.Close()
 
-	png.Encode(f, m)
+	if err := png.Encode(f, m); err != nil {
+		log.Fatalln(err)
+	}
 }

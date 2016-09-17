@@ -29,5 +29,7 @@ func main() {
 	defer f.Close()
 
 	// Encode and then write img to the file handle f
-	png.Encode(f, img)
+	if err := png.Encode(f, img); err != nil {
+		log.Fatalln(err)
+	}
 }

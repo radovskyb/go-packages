@@ -48,5 +48,7 @@ func main() {
 	defer f.Close()
 
 	// Encode m into png image format and store it in f
-	png.Encode(f, m)
+	if err := png.Encode(f, m); err != nil {
+		log.Fatalln(err)
+	}
 }

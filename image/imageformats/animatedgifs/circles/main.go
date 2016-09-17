@@ -4,6 +4,7 @@ import (
 	"image"
 	"image/color"
 	"image/gif"
+	"log"
 	"math"
 	"os"
 )
@@ -66,10 +67,16 @@ func main() {
 		}
 	}
 
-	f, _ := os.OpenFile("rgb.gif", os.O_WRONLY|os.O_CREATE, 0600)
+	f, err := os.OpenFile("rgb.gif", os.O_WRONLY|os.O_CREATE, 0600)
+	if err != nil {
+		log.Fatalln(err)
+	}
 	defer f.Close()
-	gif.EncodeAll(f, &gif.GIF{
+
+	if err := gif.EncodeAll(f, &gif.GIF{
 		Image: images,
 		Delay: delays,
-	})
+	}); err != nil {
+		log.Fatalln(err)
+	}
 }

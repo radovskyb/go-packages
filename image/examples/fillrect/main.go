@@ -36,5 +36,7 @@ func main() {
 	defer f.Close()
 
 	// Encode the image m as a jpeg file and store it's contents in f
-	jpeg.Encode(f, m, nil)
+	if err := jpeg.Encode(f, m, nil); err != nil {
+		log.Fatalln(err)
+	}
 }

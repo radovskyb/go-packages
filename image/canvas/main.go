@@ -107,12 +107,15 @@ func main() {
 	c := NewCanvas(image.Rect(0, 0, width, height))
 	c.DrawGradient()
 
-	f, err := os.Create("canvas_gradient.png")
+	f1, err := os.Create("canvas_gradient.png")
 	if err != nil {
 		log.Fatalln(err)
 	}
-	png.Encode(f, c)
-	f.Close()
+	defer f1.Close()
+
+	if err := png.Encode(f1, c); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Draw lines
 	c = NewCanvas(image.Rect(0, 0, width, height))
@@ -128,12 +131,15 @@ func main() {
 		)
 	}
 
-	f, err = os.Create("drawing_lines.png")
+	f2, err := os.Create("drawing_lines.png")
 	if err != nil {
 		log.Fatalln(err)
 	}
-	png.Encode(f, c)
-	f.Close()
+	defer f2.Close()
+
+	if err := png.Encode(f2, c); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Drawing spirals
 	width, height = 2048, 1024
@@ -157,10 +163,13 @@ func main() {
 		c.DrawSpiral(colour, Vector{x, y})
 	}
 
-	f, err = os.Create("spirals.png")
+	f3, err := os.Create("spirals.png")
 	if err != nil {
 		log.Fatalln(err)
 	}
-	png.Encode(f, c)
-	f.Close()
+	defer f3.Close()
+
+	if err := png.Encode(f3, c); err != nil {
+		log.Fatalln(err)
+	}
 }

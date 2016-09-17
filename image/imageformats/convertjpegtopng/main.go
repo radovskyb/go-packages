@@ -52,5 +52,8 @@ func main() {
 	}
 	defer pf.Close()
 
-	pf.Write(bb.Bytes())
+	_, err = pf.Write(bb.Bytes())
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

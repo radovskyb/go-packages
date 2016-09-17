@@ -20,7 +20,9 @@ func main() {
 	}
 	defer f1.Close()
 
-	jpeg.Encode(f1, src, nil)
+	if err := jpeg.Encode(f1, src, nil); err != nil {
+		log.Fatalln(err)
+	}
 
 	dest := image.NewRGBA(image.Rect(0, 0, 400, 400))
 	green := color.RGBA{150, 255, 25, 255}
@@ -32,7 +34,9 @@ func main() {
 	}
 	defer f2.Close()
 
-	jpeg.Encode(f2, dest, nil)
+	if err := jpeg.Encode(f2, dest, nil); err != nil {
+		log.Fatalln(err)
+	}
 
 	sr := src.Bounds()
 
@@ -45,5 +49,7 @@ func main() {
 	}
 	defer f3.Close()
 
-	jpeg.Encode(f3, dest, nil)
+	if err := jpeg.Encode(f3, dest, nil); err != nil {
+		log.Fatalln(err)
+	}
 }
