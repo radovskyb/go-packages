@@ -16,6 +16,7 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	defer ln.Close()
 
 	for {
 		conn, err := ln.Accept()
@@ -42,7 +43,10 @@ func handleConnections(conn net.Conn) {
 		if found, msg := readCode(code, tp); !found {
 			continue
 		} else {
-			io.Copy(mw, strings.NewReader(msg))
+			_, err := io.Copy(mw, strings.NewReader(msg))
+			if err != nil {
+				log.Fatalln(err)
+			}
 		}
 		code += 200
 	}
