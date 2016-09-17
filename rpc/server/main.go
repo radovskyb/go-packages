@@ -23,7 +23,9 @@ func main() {
 	arith := new(Arith)
 
 	// Register publishes the receiver's methods in the DefaultServer.
-	rpc.Register(arith)
+	if err := rpc.Register(arith); err != nil {
+		log.Fatalln(err)
+	}
 
 	// HandleHTTP registers an HTTP handler for RPC messages to DefaultServer
 	// on DefaultRPCPath and a debugging handler on DefaultDebugPath.
@@ -45,5 +47,5 @@ func main() {
 	// creating a new service goroutine for each.  The service goroutines
 	// read requests and then call handler to reply to them.
 	// Handler is typically nil, in which case the DefaultServeMux is used.
-	http.Serve(ln, nil)
+	log.Fatal(http.Serve(ln, nil))
 }
