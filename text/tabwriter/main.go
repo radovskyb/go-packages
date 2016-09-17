@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"text/tabwriter"
 )
@@ -37,7 +38,10 @@ func main() {
 	// Write writes buf to the writer b.
 	// The only errors returned are ones encountered
 	// while writing to the underlying output stream.
-	tw.Write([]byte("a\tb\tc\td\t.\n"))
+	_, err := tw.Write([]byte("a\tb\tc\td\t.\n"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Write another few tab separated values to `tw`, but this time write
 	// to `tw` by using `fmt.Fprintln` instead of `tw.Write`
@@ -49,7 +53,9 @@ func main() {
 	// that any data buffered in the Writer is written to output. Any
 	// incomplete escape sequence at the end is considered
 	// complete for formatting purposes.
-	tw.Flush()
+	if err := tw.Flush(); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Re-initialize `tw` and set it to write to os.Stdout again but this time
 	// set it to right-align in space-separated columns of minimal width 5 by
@@ -62,5 +68,7 @@ func main() {
 	fmt.Fprintln(tw, "123\t12345\t1234567\t123456789\t.")
 
 	// Once again call `Flush` on `tw`
-	tw.Flush()
+	if err := tw.Flush(); err != nil {
+		log.Fatalln(err)
+	}
 }

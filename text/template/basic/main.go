@@ -29,7 +29,7 @@ type Recipient struct {
 func main() {
 	// Prepare some data to insert into the template below
 	recipients := []Recipient{
-		{"Cracky Pwns", "tea set", true},
+		{"Benji Radovsky", "tea set", true},
 		{"Rado Soft", "rubik's cube", false},
 		{"Blabehdy Dah", "lala leelah", true},
 	}

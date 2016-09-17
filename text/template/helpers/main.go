@@ -22,8 +22,13 @@ func createTestDir(templates []templateFile) string {
 		if err != nil {
 			log.Fatalf("Creating template file %s error: %v\n", tmpl.Name, err)
 		}
-		f.WriteString(tmpl.Text)
-		f.Close()
+		_, err = f.WriteString(tmpl.Text)
+		if err != nil {
+			log.Fatalln(err)
+		}
+		if err := f.Close(); err != nil {
+			log.Fatalln(err)
+		}
 	}
 	return dir
 }
@@ -60,7 +65,6 @@ func main() {
 	// Add another driver template.
 	_, err = tmpls.Parse(
 		"{{define `driver2`}}Driver 2 calls T2: ({{template `T2`}})\n{{end}}")
-
 	if err != nil {
 		log.Fatal("parsing driver2 template error: ", err)
 	}

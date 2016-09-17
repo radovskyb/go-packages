@@ -22,8 +22,13 @@ func createTestDir(templates []templateFile) string {
 		if err != nil {
 			log.Fatalf("Creating template file %s error: %v\n", tmpl.Name, err)
 		}
-		f.WriteString(tmpl.Text)
-		f.Close()
+		_, err = f.WriteString(tmpl.Text)
+		if err != nil {
+			log.Fatalln(err)
+		}
+		if err := f.Close(); err != nil {
+			log.Fatalln(err)
+		}
 	}
 	return dir
 }

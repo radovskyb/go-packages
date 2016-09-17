@@ -8,13 +8,16 @@ import (
 )
 
 const (
-	master  = `Names:{{block "list" .}}{{"\n"}}{{range .}}{{println "-" .}}{{end}}{{end}}{{println}}`
+	master  = `Numbers:{{block "list" .}}{{"\n"}}{{range .}}{{println "-" .}}{{end}}{{end}}{{println}}`
 	overlay = `{{define "list"}} {{join . ", "}}{{end}}`
 )
 
 var (
-	funcs     = template.FuncMap{"join": strings.Join}
-	guardians = []string{"Gamora", "Groot", "Nebula", "Rocket", "Star-Lord"}
+	// Create a new FuncMap that will use strings.Join when join is called from a template.
+	funcs = template.FuncMap{"join": strings.Join}
+
+	// Create some data to pass to the templates.
+	numbers = []string{"one", "two", "three"}
 )
 
 func main() {
@@ -31,12 +34,12 @@ func main() {
 	}
 
 	// Execute the `masterTmpl` template and pass it guardians as template data
-	if err := masterTmpl.Execute(os.Stdout, guardians); err != nil {
+	if err := masterTmpl.Execute(os.Stdout, numbers); err != nil {
 		log.Fatalln("masterTmpl.Execute error:", err)
 	}
 
 	// Execute the `overlayTmpl` template and pass it guardians as template data
-	if err := overlayTmpl.Execute(os.Stdout, guardians); err != nil {
+	if err := overlayTmpl.Execute(os.Stdout, numbers); err != nil {
 		log.Fatalln("overlayTmpl.Execute error:", err)
 	}
 }
