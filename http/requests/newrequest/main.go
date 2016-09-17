@@ -23,7 +23,7 @@ func main() {
 	// ReadRequest or manually update the Request fields. See the Request
 	// type's documentation for the difference between inbound and outbound
 	// request fields.
-	req, err := http.NewRequest("GET", "http://google.com", nil)
+	req, err := http.NewRequest("GET", "http://betsee.com.au", nil)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -34,9 +34,11 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalln(err)
+	}
 	fmt.Println(string(body))
-
-	resp.Body.Close()
 }

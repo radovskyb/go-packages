@@ -35,5 +35,7 @@ func main() {
 	}
 
 	// Write out the response to os.Stdout
-	resp.Write(os.Stdout)
+	if err := resp.Write(os.Stdout); err != nil {
+		log.Fatalln(err)
+	}
 }

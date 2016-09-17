@@ -7,7 +7,10 @@ import (
 )
 
 func HelloWorld(w http.ResponseWriter, req *http.Request) {
-	io.WriteString(w, "hello, world!\n")
+	_, err := io.WriteString(w, "hello, world!\n")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 func main() {
@@ -20,8 +23,5 @@ func main() {
 	// and then calls Serve with handler to handle requests
 	// on incoming connections.  Handler is typically nil,
 	// in which case the DefaultServeMux is used.
-	err := http.ListenAndServe(":9000", nil)
-	if err != nil {
-		log.Fatal("ListenAndServe: ", err)
-	}
+	log.Fatal(http.ListenAndServe(":9000", nil))
 }

@@ -24,5 +24,7 @@ func main() {
 	}
 
 	// Write the request to os.Stdout
-	req.Write(os.Stdout)
+	if err := req.Write(os.Stdout); err != nil {
+		log.Fatalln(err)
+	}
 }

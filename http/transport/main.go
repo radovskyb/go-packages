@@ -9,13 +9,18 @@ import (
 func main() {
 	t := &http.Transport{}
 
-	req, err := http.NewRequest("GET", "https://www.google.com.au", nil)
-
-	resp, err := t.RoundTrip(req)
-
+	req, err := http.NewRequest("GET", "http://betsee.com.au", nil)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	resp.Write(os.Stdout)
+	resp, err := t.RoundTrip(req)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	defer resp.Body.Close()
+
+	if err := resp.Write(os.Stdout); err != nil {
+		log.Fatalln(err)
+	}
 }

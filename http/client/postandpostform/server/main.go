@@ -2,16 +2,20 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 )
 
-func GetForm(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html")
-	html := `<form method="POST">
-	<input type="text" name="name">
-	<input type="submit" value="Send">
-	</form>`
+const html = `<form method="POST">
+<input type="text" name="name">
+<input type="submit" value="Send">
+</form>`
 
+func GetFormHandler(w http.ResponseWriter, r *http.Request) {
+	// Set the Content-Type to text/html.
+	w.Header().Set("Content-Type", "text/html")
+
+	// Check if the request method is POST.
 	if r.Method == "POST" {
 		name := r.FormValue("name")
 		if name != "" {
@@ -23,6 +27,6 @@ func GetForm(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/", GetForm)
-	http.ListenAndServe(":9000", nil)
+	http.HandleFunc("/", GetFormHandler)
+	log.Fatal(http.ListenAndServe(":9000", nil))
 }

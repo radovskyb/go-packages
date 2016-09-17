@@ -54,5 +54,5 @@ func main() {
 	}
 
 	// Seperately serve the server `server` on the tcp listener `ln`
-	server.Serve(ln)
+	log.Fatal(server.Serve(ln))
 }

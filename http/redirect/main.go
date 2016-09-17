@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -19,5 +20,5 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/redirect", RedirectHandler)
 	http.HandleFunc("/", HomeHandler)
-	http.ListenAndServe(":9000", nil)
+	log.Fatal(http.ListenAndServe(":9000", nil))
 }

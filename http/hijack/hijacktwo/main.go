@@ -1,6 +1,9 @@
 package main
 
-import "net/http"
+import (
+	"log"
+	"net/http"
+)
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	// See if the webserver supports hijacking
@@ -25,13 +28,18 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	defer conn.Close()
 
 	// Write a string to the hijacked connection
-	bufrw.WriteString("Message sent over raw TCP")
+	_, err = bufrw.WriteString("Message sent over raw TCP")
+	if err != nil {
+		panic(err)
+	}
 
 	// Flush the message from the buffered writer onto the connection
-	bufrw.Flush()
+	if err := bufrw.Flush(); err != nil {
+		panic(err)
+	}
 }
 
 func main() {
 	http.HandleFunc("/", handler)
-	http.ListenAndServe(":9000", nil)
+	log.Fatal(http.ListenAndServe(":9000", nil))
 }

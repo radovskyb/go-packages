@@ -23,8 +23,5 @@ func main() {
 	// a simple call rather than having to make a whole handler to do the job
 	http.HandleFunc("/notfound", http.HandlerFunc(http.NotFound))
 
-	err := http.ListenAndServe(":9000", nil)
-	if err != nil {
-		log.Fatal("ListenAndServe: ", err)
-	}
+	log.Fatal(http.ListenAndServe(":9000", nil))
 }

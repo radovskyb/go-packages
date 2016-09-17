@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -15,7 +16,6 @@ func main() {
 	// RedirectHandler returns a request handler that redirects
 	// each request it receives to the given url using the given
 	// status code.
-	http.Handle("/redirect", http.RedirectHandler("/",
-		http.StatusTemporaryRedirect))
-	http.ListenAndServe(":9000", nil)
+	http.Handle("/redirect", http.RedirectHandler("/", http.StatusTemporaryRedirect))
+	log.Fatal(http.ListenAndServe(":9000", nil))
 }

@@ -8,9 +8,11 @@ import (
 )
 
 func main() {
+	// Create a new Client object.
 	client := &http.Client{}
 
-	req, err := http.NewRequest("GET", "http://google.com", nil)
+	// Create a new request.
+	req, err := http.NewRequest("GET", "http://betsee.com.au", nil)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -38,8 +40,15 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	// Slurp up the response's body.
 	body, err := ioutil.ReadAll(resp.Body)
-	resp.Body.Close()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	// Close the response's body.
+	if err := resp.Body.Close(); err != nil {
+		log.Fatalln(err)
+	}
 
 	fmt.Println(string(body))
 }

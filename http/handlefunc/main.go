@@ -7,7 +7,10 @@ import (
 )
 
 func HelloWorld(w http.ResponseWriter, req *http.Request) {
-	io.WriteString(w, "hello, world!\n")
+	_, err := io.WriteString(w, "hello, world!\n")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 func main() {
@@ -16,8 +19,5 @@ func main() {
 	// The documentation for ServeMux explains how patterns are matched.
 	http.HandleFunc("/", HelloWorld)
 
-	err := http.ListenAndServe(":9000", nil)
-	if err != nil {
-		log.Fatal("ListenAndServe: ", err)
-	}
+	log.Fatal(http.ListenAndServe(":9000", nil))
 }

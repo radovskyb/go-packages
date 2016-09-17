@@ -23,5 +23,5 @@ func main() {
 	// creating a new service goroutine for each.  The service goroutines
 	// read requests and then call handler to reply to them.
 	// Handler is typically nil, in which case the DefaultServeMux is used.
-	http.Serve(ln, nil)
+	log.Fatal(http.Serve(ln, nil))
 }

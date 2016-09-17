@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
+	"log"
 	"net/http"
 	"strings"
 )
@@ -41,7 +42,11 @@ func BasicAuth(w http.ResponseWriter, r *http.Request, user, pass []byte) bool {
 
 func Home(w http.ResponseWriter, r *http.Request) {
 	if BasicAuth(w, r, username, password) {
-		w.Write([]byte("Protected Area\n"))
+		_, err := w.Write([]byte("Protected Area\n"))
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 
 		// BasicAuth returns the username and password provided in the request's
 		// Authorization header, if the request uses HTTP Basic Authentication.
@@ -54,10 +59,14 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("WWW-Authenticate", `Basic realm="Protected Area"`)
 	w.WriteHeader(401)
-	w.Write([]byte("401 Unauthorized\n"))
+	_, err := w.Write([]byte("401 Unauthorized\n"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }
 
 func main() {
 	http.HandleFunc("/", Home)
-	http.ListenAndServe(":9000", nil)
+	log.Fatal(http.ListenAndServe(":9000", nil))
 }

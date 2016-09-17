@@ -9,6 +9,7 @@ import (
 )
 
 func main() {
+	// Create a new Client object.
 	client := &http.Client{}
 
 	// Create a new url.Values struct
@@ -32,13 +33,15 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	// Get the response body
+	// Slurp up the response's body.
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	// Close the response body
-	resp.Body.Close()
+	// Close the response's body.
+	if err := resp.Body.Close(); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the response body's contents
 	fmt.Println(string(body))

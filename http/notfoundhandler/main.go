@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -15,5 +16,5 @@ func main() {
 	// NotFoundHandler returns a simple request handler
 	// that replies to each request with a ``404 page not found'' reply.
 	http.Handle("/notfound", http.NotFoundHandler())
-	http.ListenAndServe(":9000", nil)
+	log.Fatal(http.ListenAndServe(":9000", nil))
 }

@@ -20,17 +20,26 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	file, err := dir.Open("file.txt")
 	if err != nil {
-		log.Fatalln(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 
 	// Get the file info from the file
 	fi, err := file.Stat()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
 	// Print the file's name
 	fmt.Println(fi.Name())
 
 	// Get the file's contents
 	contents, err := ioutil.ReadAll(file)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
 	// Print them to the user as a string
 	fmt.Fprintln(w, string(contents))
@@ -38,5 +47,5 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", handler)
-	http.ListenAndServe(":9000", nil)
+	log.Fatal(http.ListenAndServe(":9000", nil))
 }

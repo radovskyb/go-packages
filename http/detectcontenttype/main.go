@@ -10,7 +10,7 @@ import (
 func main() {
 	// Make a get request to http://google.com and store
 	// it's response in the variable resp
-	resp, err := http.Get("http://google.com")
+	resp, err := http.Get("http://betsee.com.au")
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -22,7 +22,9 @@ func main() {
 	}
 
 	// Close the response's body now that we are done reading from it
-	resp.Body.Close()
+	if err := resp.Body.Close(); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Get the content type from the response's body and store it as
 	// a string in the variable contentType

@@ -1,6 +1,9 @@
 package main
 
-import "net/http"
+import (
+	"log"
+	"net/http"
+)
 
 func main() {
 	// StripPrefix returns a handler that serves HTTP requests
@@ -9,5 +12,5 @@ func main() {
 	// request for a path that doesn't begin with prefix by
 	// replying with an HTTP 404 not found error.
 	http.Handle("/tmpfiles/", http.StripPrefix("/tmpfiles/", http.FileServer(http.Dir("/tmp"))))
-	http.ListenAndServe(":9000", nil)
+	log.Fatal(http.ListenAndServe(":9000", nil))
 }

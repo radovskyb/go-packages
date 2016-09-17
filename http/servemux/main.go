@@ -11,15 +11,24 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Write([]byte("<h1>Home Page</h1><a href=\"\\about\">About Page</a>"))
+	_, err := w.Write([]byte("<h1>Home Page</h1><a href=\"\\about\">About Page</a>"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 func aboutHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("<h1>About Page</h1><a href=\"\\home\">Home Page</a>"))
+	_, err := w.Write([]byte("<h1>About Page</h1><a href=\"\\home\">Home Page</a>"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 func ServHTTP(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("<h1>Get Page</h1><a href=\"\\home\">Home Page</a>"))
+	_, err := w.Write([]byte("<h1>Get Page</h1><a href=\"\\home\">Home Page</a>"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 func main() {
@@ -57,7 +66,8 @@ func main() {
 		// Create a new request to pass to the h.ServeHTTP() method
 		req, err := http.NewRequest("GET", "/home", nil)
 		if err != nil {
-			log.Fatalln(err)
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
 		}
 
 		// Call h's ServeHTTP method and pass the current writer
@@ -66,5 +76,5 @@ func main() {
 	})
 
 	// Listen and serve on port 9000 using the serve mux `mux`
-	http.ListenAndServe(":9000", mux)
+	log.Fatal(http.ListenAndServe(":9000", nil))
 }

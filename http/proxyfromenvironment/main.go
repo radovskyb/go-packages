@@ -1,6 +1,9 @@
 package main
 
-import "net/http"
+import (
+	"log"
+	"net/http"
+)
 
 func Hello(w http.ResponseWriter, req *http.Request) {
 	html := "Hello World!\n"
@@ -21,7 +24,11 @@ func Hello(w http.ResponseWriter, req *http.Request) {
 	//
 	// As a special case, if req.URL.Host is "localhost" (with or without
 	// a port number), then a nil URL and nil error will be returned.
-	url, _ := http.ProxyFromEnvironment(req)
+	url, err := http.ProxyFromEnvironment(req)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
 	if url != nil {
 		html = html + "scheme " + url.Scheme + "\n"
@@ -30,11 +37,14 @@ func Hello(w http.ResponseWriter, req *http.Request) {
 		html = html + "proxy returns empty url\n"
 	}
 
-	w.Write([]byte(html))
+	_, err = w.Write([]byte(html))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 }
 
 func main() {
 	http.HandleFunc("/", Hello)
-	http.ListenAndServe(":9000", nil)
+	log.Fatal(http.ListenAndServe(":9000", nil))
 }

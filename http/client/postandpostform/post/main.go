@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+	// Create a new Client object.
 	client := &http.Client{}
 
 	// Post issues a POST to the specified URL.
@@ -23,8 +24,15 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	// Slurp up the response's body.
 	body, err := ioutil.ReadAll(resp.Body)
-	resp.Body.Close()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	// Close the response's body.
+	if err := resp.Body.Close(); err != nil {
+		log.Fatalln(err)
+	}
 
 	fmt.Println(string(body))
 }

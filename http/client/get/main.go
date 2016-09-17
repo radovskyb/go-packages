@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+	// Create a new Client object.
 	client := &http.Client{}
 
 	// Get issues a GET to the specified URL. If the response is one of the
@@ -27,13 +28,20 @@ func main() {
 	// Caller should close resp.Body when done reading from it.
 	//
 	// To make a request with custom headers, use NewRequest and Client.Do.
-	resp, err := client.Get("http://google.com")
+	resp, err := client.Get("http://betsee.com.au")
 	if err != nil {
 		log.Fatalln(err)
 	}
 
+	// Slurp up the response's body.
 	body, err := ioutil.ReadAll(resp.Body)
-	resp.Body.Close()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	// Close the response's body.
+	if err := resp.Body.Close(); err != nil {
+		log.Fatalln(err)
+	}
 
 	fmt.Println(string(body))
 }

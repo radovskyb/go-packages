@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"time"
 )
@@ -27,7 +28,7 @@ func HandlerTwo(w http.ResponseWriter, r *http.Request) {
 	// then write it to the user and return
 	cookie, err := r.Cookie("loggedin")
 	if err != nil {
-		fmt.Fprintln(w, err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
@@ -38,5 +39,5 @@ func HandlerTwo(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/", HandlerOne)
 	http.HandleFunc("/two", HandlerTwo)
-	http.ListenAndServe(":9000", nil)
+	log.Fatal(http.ListenAndServe(":9000", nil))
 }

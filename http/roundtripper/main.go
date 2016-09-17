@@ -22,12 +22,18 @@ func main() {
 	// 	}).Dial,
 	// 	TLSHandshakeTimeout: 10 * time.Second,
 	// }
-	req, err := http.NewRequest("HEAD", "http://google.com", nil)
+	req, err := http.NewRequest("HEAD", "http://betsee.com.au", nil)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
 	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	if err := resp.Body.Close(); err != nil {
+		log.Fatalln(err)
+	}
 
 	fmt.Println(resp)
 }
