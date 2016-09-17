@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"log"
 	"os"
 )
 
@@ -14,8 +15,14 @@ func main() {
 	stdout := os.NewFile(1, "Standard Output")
 
 	// Print out the 2 *File's names receiving their file stats from Stat()
-	stdinInfo, _ := stdin.Stat()
-	stdoutInfo, _ := stdout.Stat()
+	stdinInfo, err := stdin.Stat()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	stdoutInfo, err := stdout.Stat()
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print stdin's name
 	fmt.Println(stdinInfo.Name()) // Standard Input
@@ -24,5 +31,8 @@ func main() {
 	fmt.Println(stdoutInfo.Name()) // Standard Output
 
 	// Now copy from stdin to stdout using io.Copy (Simple echo program)
-	io.Copy(stdout, stdin)
+	_, err = io.Copy(stdout, stdin)
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

@@ -17,11 +17,14 @@ func main() {
 	//
 	// Pipe returns a connected pair of Files; reads from r return bytes
 	// written to w. It returns the files and an error, if any.
-	r, w, _ := os.Pipe()
+	r, w, err := os.Pipe()
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Pass the pipe writer to a function that writes data to it,
 	// in this case, getting it's data from its string parameter data
-	n, err := WriteSomeDataToWriter(w, "Hello, World!")
+	n, err := w.Write([]byte("Hello, World!\n"))
 
 	// Check if there were any errors and if so, log them
 	if err != nil {
@@ -33,13 +36,11 @@ func main() {
 	data := make([]byte, n)
 
 	// Read the data from the pipe reader into byte slice `data`
-	r.Read(data)
+	_, err = r.Read(data)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the byte slice `data` as a string
 	fmt.Println(string(data))
-}
-
-func WriteSomeDataToWriter(w *os.File, data string) (n int, err error) {
-	n, err = w.Write([]byte(data))
-	return
 }

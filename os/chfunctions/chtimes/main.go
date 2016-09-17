@@ -2,16 +2,23 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"time"
 )
 
 func main() {
 	// Create a new file
-	os.Create("file.txt")
+	_, err := os.Create("file.txt")
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Get the files last modified and access time stamps
-	info, _ := os.Stat("file.txt")
+	info, err := os.Stat("file.txt")
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the files last modified time
 	fmt.Println(info.ModTime())
@@ -24,10 +31,15 @@ func main() {
 	//
 	// The underlying filesystem may truncate or round the values to a less
 	// precise time unit. If there is an error, it will be of type *PathError.
-	os.Chtimes("file.txt", time.Now(), time.Now())
+	if err := os.Chtimes("file.txt", time.Now(), time.Now()); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the last modified time after changing it above
-	info, _ = os.Stat("file.txt")
+	info, err = os.Stat("file.txt")
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the time again after it's been updated
 	fmt.Println(info.ModTime())

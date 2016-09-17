@@ -6,8 +6,7 @@ import (
 )
 
 func main() {
-	fmt.Println(
-		"Exiting the program before execution naturally finishes using os.Exit")
+	fmt.Println("Exiting the program before execution naturally finishes using os.Exit")
 
 	// Exit the program
 	//

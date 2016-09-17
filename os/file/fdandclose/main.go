@@ -19,10 +19,14 @@ func main() {
 	defer func() {
 		// Close closes the File, rendering it unusable for I/O.
 		// It returns an error, if any.
-		f.Close()
+		if err := f.Close(); err != nil {
+			log.Fatalln(err)
+		}
 
 		// Remove the file file.txt
-		os.Remove("file.txt")
+		if err := os.Remove("file.txt"); err != nil {
+			log.Fatalln(err)
+		}
 	}()
 
 	// Get and print the files description (fd)

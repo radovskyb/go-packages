@@ -17,8 +17,12 @@ func main() {
 
 	// Close and then remove the file after main finishes execution
 	defer func() {
-		f.Close()
-		os.Remove("file.txt")
+		if err := f.Close(); err != nil {
+			log.Fatalln(err)
+		}
+		if err := os.Remove("file.txt"); err != nil {
+			log.Fatalln(err)
+		}
 	}()
 
 	// Get and print the files name

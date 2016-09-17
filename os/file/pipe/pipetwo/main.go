@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
 )
 
@@ -11,7 +12,10 @@ func main() {
 	savedStdout := os.Stdout
 
 	// Create a new pipe reader and writer from os.Pipe
-	r, w, _ := os.Pipe()
+	r, w, err := os.Pipe()
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Send os.Stdout to the pipe writer
 	os.Stdout = w
@@ -20,10 +24,15 @@ func main() {
 	fmt.Printf("Hello from data passed to stdout which is currently w")
 
 	// Close the writer so we can capture it's output and stop it's blocking
-	w.Close()
+	if err := w.Close(); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Store all the data received from the writer on the reader
-	data, _ := ioutil.ReadAll(r)
+	data, err := ioutil.ReadAll(r)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Go back to normal os.Stdout
 	os.Stdout = savedStdout

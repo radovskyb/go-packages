@@ -16,7 +16,10 @@ func main() {
 	}
 
 	// Get the file.txt's info
-	info, _ := os.Stat("file.txt")
+	info, err := os.Stat("file.txt")
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Use the file's info to get it's size in bytes
 	fSize := info.Size()
@@ -29,7 +32,10 @@ func main() {
 	// Read reads up to len(b) bytes from the File. It returns the number
 	// of bytes read and an error, if any. EOF is signaled by a zero
 	// count with err set to io.EOF.
-	f.Read(data)
+	_, err = f.Read(data)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the data received from file.txt as a string
 	fmt.Println(string(data))

@@ -21,8 +21,12 @@ func main() {
 
 	// Defer to close the file handle and then remove file.txt
 	defer func() {
-		file.Close()
-		os.Remove(filename)
+		if err := file.Close(); err != nil {
+			log.Fatalln(err)
+		}
+		if err := os.Remove(filename); err != nil {
+			log.Fatalln(err)
+		}
 	}()
 
 	// Create a new pipe reader and writer
@@ -34,14 +38,22 @@ func main() {
 	}
 
 	// Write a string to the pipe writer
-	w.WriteString("Hello, World!")
+	_, err = w.WriteString("Hello, World!")
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Now close the pipe writer
-	w.Close()
+	if err := w.Close(); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Write into file.txt what was received in the pipe reader
 	// from the pipe writer (Hello, World!)
-	io.Copy(file, r)
+	_, err = io.Copy(file, r)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Get the contents of file.txt
 	contents, err := ioutil.ReadFile(filename)

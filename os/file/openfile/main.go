@@ -21,11 +21,10 @@ func main() {
 
 	// Defer to close the file and remove it
 	defer func() {
-		f.Close()
-		err := os.Remove("file.txt")
-
-		// Check if there were any errors and if so, log them
-		if err != nil {
+		if err := f.Close(); err != nil {
+			log.Fatalln(err)
+		}
+		if err := os.Remove("file.txt"); err != nil {
 			log.Fatalln(err)
 		}
 	}()
@@ -36,7 +35,10 @@ func main() {
 	}
 
 	// Write the contents from the file handle for file.txt to os.Stdout
-	io.Copy(os.Stdout, f)
+	_, err = io.Copy(os.Stdout, f)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Create a new bytes reader that reads from a byte slice
 	br := bytes.NewReader([]byte("What's up?"))

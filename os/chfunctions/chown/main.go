@@ -7,7 +7,10 @@ import (
 
 func main() {
 	// Create a new file that is owned by the current user
-	os.Create("file.txt")
+	_, err := os.Create("file.txt")
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// chown the file file.txt
 	//
@@ -17,10 +20,7 @@ func main() {
 	//
 	// In this case chown won't work because there is no other user to
 	// change the permissions to
-	err := os.Chown("file.txt", 1, 1)
-
-	// Log any errors if any occured
-	if err != nil {
+	if err := os.Chown("file.txt", 1, 1); err != nil {
 		log.Fatalln(err)
 	}
 }

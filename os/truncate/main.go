@@ -10,30 +10,29 @@ import (
 func main() {
 	// Create a new file file.txt
 	f, err := os.Create("file.txt")
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Create a defer function to run some code after main finishes execution,
 	// mainly to close and delete the file file.txt when we are done with it
 	defer func() {
 		// Close the file handle
-		f.Close()
+		if err := f.Close(); err != nil {
+			log.Fatalln(err)
+		}
 
 		// Remove the file
-		err = os.Remove("file.txt")
-
-		// Check if there were any errors whilst removing
-		// the file and if so, log them
-		if err != nil {
+		if err := os.Remove("file.txt"); err != nil {
 			log.Fatalln(err)
 		}
 	}()
 
-	// Check if there were any errors and if so, log them
+	// Write a byte slice to file.txt
+	_, err = f.Write([]byte("Hello, World!\n"))
 	if err != nil {
 		log.Fatalln(err)
 	}
-
-	// Write a byte slice to file.txt
-	f.Write([]byte("Hello, World!\n"))
 
 	// Get file.txt's file info and store it as finfo
 	finfo, err := f.Stat()

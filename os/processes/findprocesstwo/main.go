@@ -41,5 +41,7 @@ func main() {
 	// programs using the kill signal.
 	//
 	// In this case, it is actually killing the go run main.go process
-	proc2.Signal(syscall.SIGKILL)
+	if err := proc2.Signal(syscall.SIGKILL); err != nil {
+		log.Fatalln(err)
+	}
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"os"
 )
@@ -16,7 +17,10 @@ func main() {
 	}
 
 	// Get the file.txt's info
-	info, _ := os.Stat("file.txt")
+	info, err := os.Stat("file.txt")
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Use the file's info to get it's size in bytes
 	fSize := info.Size()
@@ -29,7 +33,10 @@ func main() {
 	// ReadAt reads len(b) bytes from the File starting at byte offset off.
 	// It returns the number of bytes read and the error, if any. ReadAt always
 	// returns a non-nil error when n < len(b). At end of file, that error is io.EOF.
-	f.ReadAt(data, 7)
+	_, err = f.ReadAt(data, 7)
+	if err != nil && err != io.EOF {
+		log.Fatalln(err)
+	}
 
 	// Print out the data received from file.txt as a string
 	fmt.Println(string(data))

@@ -27,6 +27,9 @@ func main() {
 	//
 	// Stat returns a FileInfo describing the named file. If there is an error, it will be of type *PathError.
 	fi, err = os.Stat("file.txt")
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print the returned info's size of file.txt
 	fmt.Println(fi.Size())

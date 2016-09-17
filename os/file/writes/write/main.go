@@ -18,8 +18,12 @@ func main() {
 
 	// Close and remove the file after main finishes execution
 	defer func() {
-		file.Close()
-		os.Remove("file.txt")
+		if err := file.Close(); err != nil {
+			log.Fatalln(err)
+		}
+		if err := os.Remove("file.txt"); err != nil {
+			log.Fatalln(err)
+		}
 	}()
 
 	// Write to the file
@@ -27,7 +31,10 @@ func main() {
 	// Write writes len(b) bytes to the File. It returns the number
 	// of bytes written and an error, if any. Write returns a
 	// non-nil error when n != len(b).
-	file.Write([]byte("Hello, World!"))
+	_, err = file.Write([]byte("Hello, World!"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Retrieve the files contents
 	contents, err := ioutil.ReadFile("file.txt")

@@ -19,7 +19,10 @@ func main() {
 	defer file.Close()
 
 	// Write some bytes to the file
-	file.Write([]byte("Hello, World! Wassup?"))
+	_, err = file.Write([]byte("Hello, World! Wassup?"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Get the file info description of file.txt
 	//
@@ -49,10 +52,7 @@ func main() {
 	// Sync commits the current contents of the file to stable storage.
 	// Typically, this means flushing the file system's in-memory copy
 	// of recently written data to disk.
-	err = file.Sync()
-
-	// Check if there were any errors and if so, log them
-	if err != nil {
+	if err := file.Sync(); err != nil {
 		log.Fatalln(err)
 	}
 

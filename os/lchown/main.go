@@ -12,10 +12,7 @@ func main() {
 	// Lchown changes the numeric uid and gid of the named file. If the
 	// file is a symbolic link, it changes the uid and gid of the link
 	// itself. If there is an error, it will be of type *PathError.
-	err := os.Lchown("file.txt", os.Getuid(), os.Getgid())
-
-	// Log any errors
-	if err != nil {
+	if err := os.Lchown("file.txt", os.Getuid(), os.Getgid()); err != nil {
 		log.Fatalln(err)
 	}
 }

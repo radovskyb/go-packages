@@ -7,8 +7,8 @@ import (
 )
 
 func main() {
-	// Open file.txt for reading
-	f, err := os.Open("file.txt")
+	// Open the current directory for reading
+	f, err := os.Open(".")
 
 	// Check if there were any errors and if so, log them
 	if err != nil {

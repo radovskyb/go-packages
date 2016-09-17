@@ -18,22 +18,31 @@ func main() {
 
 	// Close and remove the file after main finishes execution
 	defer func() {
-		file.Close()
-		os.Remove("file.txt")
+		if err := file.Close(); err != nil {
+			log.Fatalln(err)
+		}
+		if err := os.Remove("file.txt"); err != nil {
+			log.Fatalln(err)
+		}
 	}()
 
 	// Write the string sup to file.txt
 	//
 	// WriteString is like Write, but writes the contents of string
 	// s rather than a slice of bytes.
-	file.WriteString("Sup?")
+	if _, err := file.WriteString("Sup?"); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Write to the file at offset 0 therefore replacing Sup?
 	//
 	// Write writes len(b) bytes to the File. It returns the number
 	// of bytes written and an error, if any. Write returns a
 	// non-nil error when n != len(b).
-	file.WriteAt([]byte("Hello, World!"), 0)
+	_, err = file.WriteAt([]byte("Hello, World!"), 0)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Retrieve the files contents
 	contents, err := ioutil.ReadFile("file.txt")

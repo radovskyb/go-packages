@@ -15,8 +15,12 @@ func main() {
 	}
 
 	defer func() {
-		f.Close()
-		os.Remove("file.txt")
+		if err := f.Close(); err != nil {
+			log.Fatalln(err)
+		}
+		if err := os.Remove("file.txt"); err != nil {
+			log.Fatalln(err)
+		}
 	}()
 
 	fileInfo, err := f.Stat()

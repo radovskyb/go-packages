@@ -21,5 +21,8 @@ func main() {
 	}
 
 	// Copy the contents of file.txt to os.Stdout
-	io.Copy(os.Stdout, file)
+	_, err = io.Copy(os.Stdout, file)
+	if err != nil {
+		log.Fatalln(err)
+	}
 }
