@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os/user"
 )
 
@@ -10,7 +11,10 @@ func main() {
 	//
 	// Lookup looks up a user by username. If the user cannot be found,
 	// the returned error is of type UnknownUserError.
-	u, _ := user.Lookup("Benjamin")
+	u, err := user.Lookup("Benjamin")
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print the users home directory
 	fmt.Println(u.HomeDir)
