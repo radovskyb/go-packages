@@ -49,10 +49,10 @@ func main() {
 	// Execute and write both templates to os.Stdout and parse `numbers`
 	// to both as their data
 	if err := masterTmpl.Execute(os.Stdout, numbers); err != nil {
-		log.Fatal(err)
+		log.Fatalln(err)
 	}
 
 	if err := overlayTmpl.Execute(os.Stdout, numbers); err != nil {
-		log.Fatal(err)
+		log.Fatalln(err)
 	}
 }

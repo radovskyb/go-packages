@@ -35,10 +35,12 @@ func main() {
 		fmt.Printf("\n%s\n\n", indexTemplate.Name())
 
 		// Execute the template indexTemplate returned from calling t.Lookup
-		indexTemplate.Execute(os.Stdout, map[string]string{
+		if err := indexTemplate.Execute(os.Stdout, map[string]string{
 			"Title":  "Index Page",
 			"Header": "Hello, World; From the index page!",
-		})
+		}); err != nil {
+			log.Fatalln(err)
+		}
 
 		fmt.Println()
 	}
