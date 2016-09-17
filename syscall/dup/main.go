@@ -12,6 +12,7 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	defer syscall.Close(fd)
 
 	// Store a copy of the current `stdout`'s `fd`.
 	oldStdout, err := syscall.Dup(syscall.Stdout)
