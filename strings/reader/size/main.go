@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"strings"
 )
 
@@ -14,7 +15,10 @@ func main() {
 	buf := make([]byte, sr.Len())
 
 	// Read from sr into buf
-	sr.Read(buf)
+	_, err := sr.Read(buf)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out buf as a string
 	fmt.Println(string(buf)) // Hello, World!

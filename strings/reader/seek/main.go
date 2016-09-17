@@ -13,7 +13,10 @@ func main() {
 	// Move the reader over 1 byte
 	//
 	// Seek implements the io.Seeker interface.
-	sr.Seek(1, 1)
+	_, err := sr.Seek(1, 1)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Read 1 byte from sr into `b`
 	b, err := sr.ReadByte()

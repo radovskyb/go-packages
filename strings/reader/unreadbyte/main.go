@@ -23,7 +23,9 @@ func main() {
 	fmt.Println(sr.Len()) // 12
 
 	// Now unread the previously read byte `H`
-	sr.UnreadByte()
+	if err := sr.UnreadByte(); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Once again print out the amount of unread byte in `sr`
 	fmt.Println(sr.Len()) // 13

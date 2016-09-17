@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"os"
 	"strings"
 )
@@ -15,5 +16,8 @@ func main() {
 	// given writer, in this case, os.Stout
 	//
 	// WriteString writes s to w with all replacements performed.
-	rep.WriteString(os.Stdout, "This is <b>HTML<b>\n")
+	_, err := rep.WriteString(os.Stdout, "This is <b>HTML<b>\n")
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

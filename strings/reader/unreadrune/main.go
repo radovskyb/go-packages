@@ -23,7 +23,9 @@ func main() {
 	fmt.Println(sr.Len()) // 12
 
 	// Now unread the previously read rune `H`
-	sr.UnreadRune()
+	if err := sr.UnreadRune(); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Once again print out the amount of unread byte in `sr`
 	fmt.Println(sr.Len()) // 13
