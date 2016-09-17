@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"log"
 	"os"
 	"os/exec"
 )
@@ -14,10 +15,15 @@ func main() {
 	// into the variable stdout which underneath will use
 	// io.Pipe and cmd.Wait etc to achieve what was achieved
 	// with command piping using io.Pipe in the io package
-	stdout, _ := cmd.StdoutPipe()
+	stdout, err := cmd.StdoutPipe()
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Start the command
-	cmd.Start()
+	if err := cmd.Start(); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Create a new buffered reader `in` that will read from
 	// the commands piped stdout
@@ -38,5 +44,7 @@ func main() {
 	cmd.Stdout = os.Stdout
 
 	// Run the second command
-	cmd.Run()
+	if err := cmd.Run(); err != nil {
+		log.Fatalln(err)
+	}
 }

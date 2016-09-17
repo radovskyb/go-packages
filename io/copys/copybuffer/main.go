@@ -2,6 +2,7 @@ package main
 
 import (
 	"io"
+	"log"
 	"os"
 )
 
@@ -12,5 +13,8 @@ func main() {
 	// the provided buffer (if one is required) rather than allocating
 	// a temporary one. If buf is nil, one is allocated; otherwise
 	// if it has zero length, CopyBuffer panics.
-	io.CopyBuffer(os.Stdout, os.Stdin, nil)
+	_, err := io.CopyBuffer(os.Stdout, os.Stdin, nil)
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

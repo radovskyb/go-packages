@@ -2,12 +2,12 @@ package main
 
 import (
 	"io"
+	"log"
 	"os"
 )
 
 func main() {
 	// Copy from stdin to stdout (a simple echo program)
-	//
 	//
 	// Copy copies from src to dst until either EOF is reached on src
 	// or an error occurs. It returns the number of bytes copied and
@@ -21,5 +21,8 @@ func main() {
 	// by calling src.WriteTo(dst). Otherwise, if dst implements the
 	// ReaderFrom interface, the copy is implemented by
 	// calling dst.ReadFrom(src).
-	io.Copy(os.Stdout, os.Stdin)
+	_, err := io.Copy(os.Stdout, os.Stdin)
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

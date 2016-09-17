@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"os"
+	"log"
 )
 
 func main() {
@@ -31,16 +31,22 @@ func main() {
 	// write text to be gzipped and push to pipe
 	go func() {
 		fmt.Println("Start writing")
-		n, err := gWriter.Write([]byte("These words will be compressed and push into pipe"))
 
+		n, err := gWriter.Write([]byte("These words will be compressed and push into pipe"))
 		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
+			log.Fatalln(err)
 		}
 
-		gWriter.Close()
-		b64Writer.Close()
-		pWriter.Close()
+		if err := gWriter.Close(); err != nil {
+			log.Fatalln(err)
+		}
+		if err := b64Writer.Close(); err != nil {
+			log.Fatalln(err)
+		}
+		if err := pWriter.Close(); err != nil {
+			log.Fatalln(err)
+		}
+
 		fmt.Printf("Written %d bytes \n", n)
 	}()
 
@@ -53,16 +59,13 @@ func main() {
 	gReader, err := gzip.NewReader(b64Reader)
 
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		log.Fatalln(err)
 	}
 
 	// print out the text
 	text, err := ioutil.ReadAll(gReader)
-
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		log.Fatalln(err)
 	}
 
 	fmt.Printf("%s\n", text)

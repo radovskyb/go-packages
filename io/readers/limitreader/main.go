@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"log"
 	"os"
 )
 
@@ -19,8 +20,11 @@ func main() {
 	buf := make([]byte, 10)
 
 	// Read from r into buf
-	r.Read(buf)
+	n, err := r.Read(buf)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Now print the contents of buf
-	fmt.Println(string(buf))
+	fmt.Printf("Read %d bytes from r into buf: %s", n, buf)
 }

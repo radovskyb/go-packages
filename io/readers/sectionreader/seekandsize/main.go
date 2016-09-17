@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"log"
 	"strings"
 )
 
@@ -22,13 +23,19 @@ func main() {
 	fmt.Println(sr.Size()) // 7
 
 	// Now seek the position 1 place after the current offset
-	sr.Seek(1, 1) // Now at the position of byte `W
+	_, err := sr.Seek(1, 1) // Now at the position of byte `W
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Create a byte slice buf to read into
 	buf := make([]byte, 7)
 
 	// Read from sr into buf
-	sr.Read(buf)
+	_, err = sr.Read(buf)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out buf as a string
 	fmt.Println(string(buf)) // Prints: `World!`

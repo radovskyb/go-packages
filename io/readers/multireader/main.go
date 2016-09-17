@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
 	"strings"
 )
 
@@ -30,7 +31,10 @@ func main() {
 	// Read all the data from both readers in multi reader m
 	// using ioutil.ReadAll which reads all data from a reader
 	// until either an error or EOF occurs
-	data, _ := ioutil.ReadAll(m)
+	data, err := ioutil.ReadAll(m)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the combined data read from multi reader m
 	// in stringified format as opposed to a slice of bytes

@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"io"
+	"log"
 	"os"
 )
 
@@ -16,5 +18,9 @@ func main() {
 	//
 	// If dst implements the ReaderFrom interface, the copy
 	// is implemented using it.
-	io.CopyN(os.Stdout, os.Stdin, 10)
+	n, err := io.CopyN(os.Stdout, os.Stdin, 10)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	fmt.Printf("Copied %d bytes from os.Stdin to os.Stdout", n)
 }

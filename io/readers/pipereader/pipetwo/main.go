@@ -2,6 +2,7 @@ package main
 
 import (
 	"io"
+	"log"
 	"os"
 	"os/exec"
 )
@@ -48,8 +49,12 @@ func main() {
 	second.Stdout = os.Stdout
 
 	// Start both commands
-	first.Start()
-	second.Start()
+	if err := first.Start(); err != nil {
+		log.Fatalln(err)
+	}
+	if err := second.Start(); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Run Wait on the first command because here we need
 	// to wait for the commands input to finish copying
@@ -63,16 +68,24 @@ func main() {
 	// to complete.
 	//
 	// Wait releases any resources associated with the Cmd.
-	first.Wait()
+	if err := first.Wait(); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Close the pipe writer so the pipe reader can grab
 	// the contents from it
-	pWriter.Close()
+	if err := pWriter.Close(); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Run Wait on the first command to free up any
 	// resources associated with the second command
-	second.Wait()
+	if err := second.Wait(); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Close the pipe reader now that it's job is done
-	pReader.Close()
+	if err := pReader.Close(); err != nil {
+		log.Fatalln(err)
+	}
 }

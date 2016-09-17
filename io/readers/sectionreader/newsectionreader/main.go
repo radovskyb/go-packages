@@ -2,6 +2,7 @@ package main
 
 import (
 	"io"
+	"log"
 	"os"
 	"strings"
 )
@@ -21,5 +22,8 @@ func main() {
 	sr := io.NewSectionReader(r, 7, 6)
 
 	// Copy sr's contents to os.Stdout
-	io.Copy(os.Stdout, sr) // Print: World!
+	_, err := io.Copy(os.Stdout, sr) // Print: World!
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

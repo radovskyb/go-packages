@@ -2,6 +2,7 @@ package main
 
 import (
 	"io"
+	"log"
 	"os"
 )
 
@@ -11,5 +12,8 @@ func main() {
 	// WriteString writes the contents of the string s to w,
 	// which accepts a slice of bytes. If w implements a
 	// WriteString method, it is invoked directly.
-	io.WriteString(os.Stdout, "Hello, World!")
+	_, err := io.WriteString(os.Stdout, "Hello, World!")
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

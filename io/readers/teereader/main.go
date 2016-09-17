@@ -2,6 +2,7 @@ package main
 
 import (
 	"io"
+	"log"
 	"os"
 	"strings"
 )
@@ -15,14 +16,17 @@ func main() {
 	// writes to w. There is no internal buffering - the write must
 	// complete before the read completes. Any error encountered while
 	// writing is reported as a read error.
-	tr := io.TeeReader(strings.NewReader("Hello, World!"), os.Stdout)
+	tr := io.TeeReader(strings.NewReader("Hello, World!\n"), os.Stdout)
 
 	// Create a new byte slice variable buf to hold reads from
 	// TeeReader tr
-	buf := make([]byte, 13)
+	buf := make([]byte, 14)
 
 	// Read from tr into buf
 	// This will now print what it reads to os.Stdout as
 	// os.Stdout was used as TeaReaders writer parameter
-	tr.Read(buf)
+	_, err := tr.Read(buf)
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

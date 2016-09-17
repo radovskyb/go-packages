@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"log"
 	"strings"
 )
 
@@ -24,7 +25,10 @@ func main() {
 	buf := make([]byte, 6)
 
 	// Read from sr with an offset of 1
-	sr.ReadAt(buf, 1) // Returns: orld!
+	_, err := sr.ReadAt(buf, 1) // Returns: orld!
+	if err != nil && err != io.EOF {
+		log.Fatalln(err)
+	}
 
 	// Print buf to os.Stdout
 	fmt.Println(string(buf)) // orld!

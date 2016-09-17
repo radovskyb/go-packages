@@ -10,14 +10,24 @@ import (
 func main() {
 	// Create and open 2 files, and store a file handle
 	// for each in fw1 and fw2 variables respectively
-	fw1, _ := os.Create("fileone.txt")
-	fw2, _ := os.Create("filetwo.txt")
+	fw1, err := os.Create("fileone.txt")
+	if err != nil {
+		log.Fatalln(err)
+	}
+	fw2, err := os.Create("filetwo.txt")
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Defer func to close both file handles after
 	// main function finishes execution
 	defer func() {
-		fw1.Close()
-		fw2.Close()
+		if err := fw1.Close(); err != nil {
+			panic(err)
+		}
+		if err := fw2.Close(); err != nil {
+			panic(err)
+		}
 	}()
 
 	// Create an io.Writer slice that contains
@@ -45,6 +55,5 @@ func main() {
 	}
 
 	// Print out how many bytes were written using mw
-	fmt.Println("MultiWriter mw printed", n,
-		"bytes to 3 writers at the same time")
+	fmt.Printf("MultiWriter mw printed %d bytes to 3 writers at the same time", n)
 }
