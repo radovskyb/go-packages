@@ -23,8 +23,7 @@ func main() {
 			// of req are used.
 			dump, err := httputil.DumpRequest(r, true)
 			if err != nil {
-				http.Error(w, fmt.Sprint(err),
-					http.StatusInternalServerError)
+				http.Error(w, fmt.Sprint(err), http.StatusInternalServerError)
 				return
 			}
 
@@ -40,7 +39,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	req.Host = "www.example.org"
+	req.Host = "http://betsee.com.au"
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {

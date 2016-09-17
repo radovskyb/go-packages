@@ -12,17 +12,21 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	defer ln.Close()
 
 	for {
 		conn, err := ln.Accept()
 		if err != nil {
-			log.Fatalln(err)
+			panic(err)
 		}
 		defer conn.Close()
 
 		go func() {
 			mw := io.MultiWriter(os.Stdout, conn)
-			io.Copy(mw, conn)
+			_, err = io.Copy(mw, conn)
+			if err != nil {
+				panic(err)
+			}
 		}()
 	}
 }

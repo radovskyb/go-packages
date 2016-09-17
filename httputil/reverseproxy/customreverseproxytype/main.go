@@ -16,6 +16,7 @@ type CustomProxy struct {
 func (cp *CustomProxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("Redirecting to %s\n", cp.Target)
 	cp.ReverseProxy.ServeHTTP(w, r)
+	return
 }
 
 func NewCustomProxy(target string) *CustomProxy {
@@ -39,6 +40,6 @@ func NewCustomProxy(target string) *CustomProxy {
 }
 
 func main() {
-	proxy := NewCustomProxy("http://google.com")
-	http.ListenAndServe(":9000", proxy)
+	proxy := NewCustomProxy("http://betsee.com.au")
+	log.Fatal(http.ListenAndServe(":9000", proxy))
 }

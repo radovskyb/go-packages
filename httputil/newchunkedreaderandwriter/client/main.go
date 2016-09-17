@@ -27,7 +27,10 @@ func main() {
 	// would result in double chunking or chunking with a Content-Length
 	// length, both of which are wrong.
 	cw := httputil.NewChunkedWriter(conn)
-	cw.Write([]byte(chunks))
+	_, err = cw.Write([]byte(chunks))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// NewChunkedReader returns a new chunkedReader that translates the data read from r
 	// out of HTTP "chunked" format before returning it.
@@ -36,6 +39,8 @@ func main() {
 	// NewChunkedReader is not needed by normal applications. The http package
 	// automatically decodes chunking when reading response bodies.
 	cr := httputil.NewChunkedReader(conn)
-	io.Copy(os.Stdout, cr)
-
+	_, err = io.Copy(os.Stdout, cr)
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

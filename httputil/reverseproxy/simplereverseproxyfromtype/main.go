@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"net/http/httputil"
 )
@@ -14,5 +15,5 @@ func main() {
 		},
 	}
 
-	http.ListenAndServe(":9000", proxy)
+	log.Fatal(http.ListenAndServe(":9000", proxy))
 }

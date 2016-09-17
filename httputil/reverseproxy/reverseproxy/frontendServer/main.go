@@ -18,5 +18,5 @@ func main() {
 	// target's path is "/base" and the incoming request was for "/dir",
 	// the target request will be for /base/dir.
 	proxy := httputil.NewSingleHostReverseProxy(rpURL)
-	http.ListenAndServe(":9000", proxy)
+	log.Fatal(http.ListenAndServe(":9000", proxy))
 }
