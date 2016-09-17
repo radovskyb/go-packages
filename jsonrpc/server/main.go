@@ -39,7 +39,9 @@ func main() {
 	// no suitable methods. It also logs the error using package log.
 	// The client accesses each method using a string of the form
 	// "Type.Method", where Type is the receiver's concrete type.
-	server.Register(arith)
+	if err := server.Register(arith); err != nil {
+		log.Fatalln(err)
+	}
 
 	// Create a new tcp listener on port 9000
 	ln, err := net.Listen("tcp", ":9000")
