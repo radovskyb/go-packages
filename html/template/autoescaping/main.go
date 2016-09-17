@@ -26,7 +26,7 @@ func main() {
 	// execution stops, but partial results may already have been written to
 	// the output writer.
 	// A template may be executed safely in parallel.
-	err = t.ExecuteTemplate(os.Stdout, "Foo", "<script>alert('Pwned!')</script>")
+	err = t.ExecuteTemplate(os.Stdout, "T", "<script>alert('Pwned!')</script>")
 	if err != nil {
 		log.Fatalln(err)
 	}

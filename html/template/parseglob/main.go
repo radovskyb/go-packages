@@ -31,7 +31,10 @@ func main() {
 	}
 
 	// Execute the index page template and pass it `data`
-	t.ExecuteTemplate(os.Stdout, "index", data)
+	err = t.ExecuteTemplate(os.Stdout, "index", data)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	fmt.Println()
 
@@ -45,5 +48,8 @@ func main() {
 	}
 
 	// Execute the about page template and pass it `data`
-	t.ExecuteTemplate(os.Stdout, "about", data)
+	err = t.ExecuteTemplate(os.Stdout, "about", data)
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

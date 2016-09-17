@@ -2,6 +2,7 @@ package main
 
 import (
 	"html/template"
+	"log"
 	"os"
 )
 
@@ -24,5 +25,7 @@ func main() {
 
 	// Execute template `t` to print to os.Stdout and pass
 	// `names` as it's data to it
-	t.Execute(os.Stdout, names)
+	if err := t.Execute(os.Stdout, names); err != nil {
+		log.Fatalln(err)
+	}
 }

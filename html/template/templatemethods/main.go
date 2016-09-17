@@ -55,5 +55,7 @@ func main() {
 	}
 
 	// Execute the about page template and pass it `data`
-	t.ExecuteTemplate(os.Stdout, "about", data)
+	if err := t.ExecuteTemplate(os.Stdout, "about", data); err != nil {
+		log.Fatalln(err)
+	}
 }

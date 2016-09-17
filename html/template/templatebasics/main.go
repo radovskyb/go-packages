@@ -35,7 +35,9 @@ func main() {
 	// only one call can contain text other than space, comments,
 	// and template definitions.)
 	t, err := template.New("webpage").Parse(tmpl)
-	checkError(err)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	data := struct {
 		Title string
@@ -59,8 +61,9 @@ func main() {
 	// execution stops, but partial results may already have been written to
 	// the output writer.
 	// A template may be executed safely in parallel.
-	err = t.Execute(os.Stdout, data)
-	checkError(err)
+	if err := t.Execute(os.Stdout, data); err != nil {
+		log.Fatalln(err)
+	}
 
 	noItemsData := struct {
 		Title string
@@ -75,14 +78,7 @@ func main() {
 	// Execute the template again but this time apply the data `noItemsData`
 	// to the template, which will output the template slightly differently
 	// to before, but once again print the data applied template to `os.Stdout`
-	err = t.Execute(os.Stdout, noItemsData)
-	checkError(err)
-}
-
-// checkError simple takes an error value and calls log.Fatalln
-// with the error as it's parameter if the error is not nil
-func checkError(err error) {
-	if err != nil {
+	if err := t.Execute(os.Stdout, noItemsData); err != nil {
 		log.Fatalln(err)
 	}
 }

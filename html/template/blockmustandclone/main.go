@@ -10,13 +10,16 @@ import (
 const (
 	// Create a template text variable that uses the template keyword `block`
 	// to easily reuse part of a template
-	master  = `Names:{{block "list" .}}{{"\n"}}{{range .}}{{println "-" .}}{{end}}{{end}}{{"\n"}}`
+	master  = `Numbers:{{block "list" .}}{{"\n"}}{{range .}}{{println "-" .}}{{end}}{{end}}{{"\n"}}`
 	overlay = `{{define "list"}} {{join . ", "}}{{end}} `
 )
 
 var (
-	funcs     = template.FuncMap{"join": strings.Join}
-	guardians = []string{"Gamora", "Groot", "Nebula", "Rocket", "Star-Lord"}
+	// Create a new FuncMap that will use strings.Join when join is called from a template.
+	funcs = template.FuncMap{"join": strings.Join}
+
+	// Create some data to pass to the templates.
+	numbers = []string{"one", "two", "three"}
 )
 
 func main() {
@@ -43,13 +46,13 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Execute and write both templates to os.Stdout and parse `guardians`
+	// Execute and write both templates to os.Stdout and parse `numbers`
 	// to both as their data
-	if err := masterTmpl.Execute(os.Stdout, guardians); err != nil {
+	if err := masterTmpl.Execute(os.Stdout, numbers); err != nil {
 		log.Fatal(err)
 	}
 
-	if err := overlayTmpl.Execute(os.Stdout, guardians); err != nil {
+	if err := overlayTmpl.Execute(os.Stdout, numbers); err != nil {
 		log.Fatal(err)
 	}
 }
