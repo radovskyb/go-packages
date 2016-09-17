@@ -13,5 +13,8 @@ func main() {
 	}
 
 	// Write to the connection
-	conn.Write([]byte("Hello, World!\n"))
+	_, err = conn.Write([]byte("Hello, World!\n"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 }

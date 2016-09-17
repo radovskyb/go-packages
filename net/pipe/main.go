@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"log"
 	"net"
 )
 
@@ -11,7 +12,10 @@ func Client(c net.Conn) {
 	// Create a new bytes buffer
 	var buf bytes.Buffer
 	// Copy anything written to c out to bytes buffer buf
-	io.Copy(&buf, c)
+	_, err := io.Copy(&buf, c)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Append to and then print the string inside of buf to stdout
 	fmt.Print(buf.String() + " printed from client connection")
@@ -19,9 +23,14 @@ func Client(c net.Conn) {
 
 func Server(c net.Conn) {
 	// Send a byte slice over the connection
-	c.Write([]byte("Hello, world from server connection."))
+	_, err := c.Write([]byte("Hello, world from server connection."))
+	if err != nil {
+		log.Fatalln(err)
+	}
 	// Close the connection to tell the pipe that writing is done
-	c.Close()
+	if err := c.Close(); err != nil {
+		log.Fatalln(err)
+	}
 }
 
 func main() {

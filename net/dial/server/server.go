@@ -13,16 +13,22 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	defer ln.Close()
 
 	for {
 		conn, err := ln.Accept()
-		defer conn.Close()
-		fmt.Println("Connection accepted.")
 		if err != nil {
 			log.Fatalln(err)
 		}
+		defer conn.Close()
+
+		fmt.Println("Connection accepted.")
+
 		go func() {
-			io.Copy(os.Stdout, conn)
+			_, err := io.Copy(os.Stdout, conn)
+			if err != nil {
+				log.Fatalln(err)
+			}
 		}()
 	}
 }
