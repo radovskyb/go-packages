@@ -32,7 +32,12 @@ func TestHomeHandler(t *testing.T) {
 
 		expected := fmt.Sprintf("Visitor count: %d.", i)
 		actual, err := ioutil.ReadAll(resp.Body)
-		resp.Body.Close()
+		if err != nil {
+			t.Fatal(err)
+		}
+		if err := resp.Body.Close(); err != nil {
+			t.Fatal(err)
+		}
 
 		if !strings.Contains(string(actual), expected) {
 			t.Errorf("Expected body to contain %s\nBody %s", expected, actual)

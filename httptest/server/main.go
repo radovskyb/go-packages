@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net"
 	"net/http"
 	"sync"
@@ -45,5 +46,5 @@ func main() {
 		ConnState: printState,
 	}
 
-	server.ListenAndServe()
+	log.Fatal(server.ListenAndServe())
 }

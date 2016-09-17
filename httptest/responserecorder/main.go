@@ -12,7 +12,7 @@ func main() {
 		http.Error(w, "An error occured", http.StatusInternalServerError)
 	}
 
-	req, err := http.NewRequest("GET", "http://example.com", nil)
+	req, err := http.NewRequest("GET", "http://betsee.com.au", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
