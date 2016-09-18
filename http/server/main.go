@@ -52,6 +52,7 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	defer ln.Close()
 
 	// Seperately serve the server `server` on the tcp listener `ln`
 	log.Fatal(server.Serve(ln))
