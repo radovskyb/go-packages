@@ -39,7 +39,7 @@ func main() {
 	}
 
 	// Now run cmd.CombinedOutput() to return both the standard output
-	// and standard error intot the byte slice output and if there are
+	// and standard error into the byte slice output and if there are
 	// any errors then log them, otherwise print out the output as a string
 	if output, err := cmd.CombinedOutput(); err != nil {
 		log.Fatalln(err)
