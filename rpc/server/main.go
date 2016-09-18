@@ -38,8 +38,10 @@ func main() {
 	if err != nil {
 		log.Fatalln("Listener error: " + err.Error())
 	}
-	defer ln.Close()
 
+	// http.Serve will close the listener when it's done with it
+	// so there's no need to call defer ln.Close() above.
+	//
 	// At this point, clients can see a service "Arith" with the
 	// method "Arith.Add"
 	//

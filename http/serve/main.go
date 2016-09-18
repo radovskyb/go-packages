@@ -19,6 +19,9 @@ func main() {
 
 	http.HandleFunc("/", handler)
 
+	// http.Serve will close the listener when it's done with it
+	// so there's no need to call defer ln.Close() above.
+	//
 	// Serve accepts incoming HTTP connections on the listener l,
 	// creating a new service goroutine for each.  The service goroutines
 	// read requests and then call handler to reply to them.
