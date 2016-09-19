@@ -67,7 +67,10 @@ func main() {
 	h3 := sha512.New512_256()
 
 	// Write a string to `h3`
-	h3.Write([]byte("Password123"))
+	_, err = h3.Write([]byte("Password123"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the sha512_256 encrypted string from above
 	//

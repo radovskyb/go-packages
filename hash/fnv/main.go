@@ -59,7 +59,10 @@ func main() {
 	hasher3 := fnv.New64()
 
 	// Write a []byte to `hasher3`
-	hasher3.Write([]byte("Password123"))
+	_, err = hasher3.Write([]byte("Password123"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Print out the encrypted []byte from above
 	//

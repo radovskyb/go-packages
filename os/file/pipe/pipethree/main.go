@@ -16,7 +16,10 @@ func main() {
 	}
 
 	// Write to the pipe writer.
-	w.Write([]byte("Hello, World!"))
+	_, err = w.Write([]byte("Hello, World!"))
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Crete a new string channel that will receive data from the pipe reader
 	// from inside of the go routine below

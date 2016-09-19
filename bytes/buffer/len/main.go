@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"log"
 	"os"
 )
 
@@ -20,11 +21,17 @@ func main() {
 	fmt.Println(buf.Len()) // 2
 
 	// Write one more byte element `c` to the buffer buf
-	buf.Write([]byte{'c'})
+	_, err := buf.Write([]byte{'c'})
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	// Once again print the current length of buffer buf
 	fmt.Println(buf.Len()) // 3
 
 	// Write out the buffers contents to os.Stdout
-	buf.WriteTo(os.Stdout) // abc
+	_, err = buf.WriteTo(os.Stdout) // abc
+	if err != nil {
+		log.Fatalln(err)
+	}
 }
