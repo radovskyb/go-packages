@@ -1,8 +1,6 @@
 # go-packages
 A large repository of code and documented examples for Go's standard package library.
 
-#### All errors that needed handling should now be handled (unless I've missed anything).
-
 `go-packages` is a large collection of code examples and documentation for a large majority of the functions and methods from Go's standard package library.
 
 These examples were mostly put together from when I was first learning Go.
