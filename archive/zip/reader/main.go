@@ -16,7 +16,11 @@ func main() {
 		log.Fatalln(err)
 	}
 	// Close the archive when we're done
-	defer r.Close()
+	defer func() {
+		if err := r.Close(); err != nil {
+			log.Fatalln(err)
+		}
+	}()
 
 	// Iterate through the files in the archive
 	for _, f := range r.File {

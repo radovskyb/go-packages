@@ -14,13 +14,14 @@ func main() {
 		log.Fatalln(err)
 	}
 	// Close the new archive file when we're done
-	defer f.Close()
+	defer func() {
+		if err := f.Close(); err != nil {
+			log.Fatalln(err)
+		}
+	}()
 
 	// Create a new tar writer that writes to f
 	tw := tar.NewWriter(f)
-
-	// Close the tar writer when we're done
-	defer tw.Close()
 
 	// Create some files to add to the archive
 	var files = []struct {
@@ -49,5 +50,10 @@ func main() {
 		if _, err := tw.Write([]byte(file.Body)); err != nil {
 			log.Fatalln(err)
 		}
+	}
+
+	// Close the tar writer when we're done
+	if err := tw.Close(); err != nil {
+		log.Fatalln(err)
 	}
 }

@@ -14,13 +14,14 @@ func main() {
 		log.Fatalln(err)
 	}
 	// Close the new archive file when we're done
-	defer f.Close()
+	defer func() {
+		if err := f.Close(); err != nil {
+			log.Fatalln(err)
+		}
+	}()
 
 	// Create a new zip writer that writes to f
 	w := zip.NewWriter(f)
-
-	// Close the zip writer when we're done
-	defer w.Close()
 
 	// Create some files to add to the archive
 	var files = []struct {
@@ -43,5 +44,10 @@ func main() {
 		if err != nil {
 			log.Fatalln(err)
 		}
+	}
+
+	// Close the zip writer when we're done
+	if err := w.Close(); err != nil {
+		log.Fatalln(err)
 	}
 }
