@@ -4,7 +4,7 @@ A large repository of code and documented examples for Go's standard package lib
 `go-packages` is a large collection of code examples and documentation for a large majority of the functions and methods from Go's standard package library.
 
 # Requests
-If anybody would like to make any requests for old or non idiomatic examples that I might have written or found straight from the web, to be updated or re-written, or if there are any examples that you want added, whether it be from the packages already on here, more complex versions of current examples, or examples from packages that are missing. Feel free to let me know or just open up an issue on the repo for me to see :)
+If anybody would like to make any requests for old or non idiomatic examples that I might have written or found straight from the web, to be updated or re-written, or if there are any examples that you want added, whether it be from the packages already on here, more complex versions of current examples, or examples from packages that are missing. Feel free to let me know or just open up an issue on this repo :)
 
 # Description
 When I first started learning Go, I started to write this repo to help myself learn as many of the functions and methods as I possibly could from the standard package library.
