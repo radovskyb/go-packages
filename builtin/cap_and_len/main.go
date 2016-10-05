@@ -4,7 +4,10 @@
 // according to its type:
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
 func main() {
 	// String len: the number of bytes in v
@@ -82,7 +85,7 @@ func main() {
 
 	fmt.Println("\nChannel Two:")
 	channel_one := make(chan int, 5)
-	fmt.Println(channel_one)
+	fmt.Println(reflect.TypeOf(channel_one))
 	fmt.Println("cap:", cap(channel_one)) // 5
 	fmt.Println("len:", len(channel_one)) // 0
 	close(channel_one)
@@ -91,7 +94,7 @@ func main() {
 	channel_two := make(chan int, 5)
 	channel_two <- 1
 	channel_two <- 2
-	fmt.Println(channel_two)
+	fmt.Println(reflect.TypeOf(channel_two))
 	fmt.Println("cap:", cap(channel_two)) // 5
 	fmt.Println("len:", len(channel_two)) // 2
 	close(channel_two)

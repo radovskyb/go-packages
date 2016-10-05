@@ -45,7 +45,11 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	defer f.Close()
+	defer func() {
+		if err := f.Close(); err != nil {
+			log.Fatalln(err)
+		}
+	}()
 
 	// Encode m into png image format and store it in f
 	if err := png.Encode(f, m); err != nil {

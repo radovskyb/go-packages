@@ -25,7 +25,11 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	defer f.Close()
+	defer func() {
+		if err := f.Close(); err != nil {
+			log.Fatalln(err)
+		}
+	}()
 
 	if err := jpeg.Encode(f, m1, nil); err != nil {
 		log.Fatalln(err)

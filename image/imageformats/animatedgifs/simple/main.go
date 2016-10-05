@@ -39,7 +39,11 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	defer f.Close()
+	defer func() {
+		if err := f.Close(); err != nil {
+			log.Fatalln(err)
+		}
+	}()
 
 	// Encode outGif as a gif file and store it in f
 	if err := gif.EncodeAll(f, outGif); err != nil {

@@ -52,7 +52,11 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	defer f.Close()
+	defer func() {
+		if err := f.Close(); err != nil {
+			log.Fatalln(err)
+		}
+	}()
 
 	if err := png.Encode(f, m); err != nil {
 		log.Fatalln(err)
