@@ -56,15 +56,18 @@ func main() {
 		if err != nil {
 			log.Fatalln("Accept error: " + err.Error())
 		}
-		defer conn.Close()
 
-		// Call `server.ServeCodec` and call the function
-		// `jsonrpc.NewServerCodec(conn)` as it's parameter
-		//
-		// ServeCodec is like ServeConn but uses the specified codec to
-		// decode requests and encode responses.
-		//
-		// NewServerCodec returns a new rpc.ServerCodec using JSON-RPC on conn.
-		server.ServeCodec(jsonrpc.NewServerCodec(conn))
+		go func(conn net.Conn) {
+			defer conn.Close()
+
+			// Call `server.ServeCodec` and call the function
+			// `jsonrpc.NewServerCodec(conn)` as it's parameter
+			//
+			// ServeCodec is like ServeConn but uses the specified codec to
+			// decode requests and encode responses.
+			//
+			// NewServerCodec returns a new rpc.ServerCodec using JSON-RPC on conn.
+			server.ServeCodec(jsonrpc.NewServerCodec(conn))
+		}(conn)
 	}
 }

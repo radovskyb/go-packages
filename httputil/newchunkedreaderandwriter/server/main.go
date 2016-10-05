@@ -19,14 +19,15 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		defer conn.Close()
 
-		go func() {
+		go func(conn net.Conn) {
+			defer conn.Close()
+
 			mw := io.MultiWriter(os.Stdout, conn)
 			_, err = io.Copy(mw, conn)
 			if err != nil {
 				panic(err)
 			}
-		}()
+		}(conn)
 	}
 }

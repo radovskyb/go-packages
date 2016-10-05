@@ -20,15 +20,16 @@ func main() {
 		if err != nil {
 			log.Fatalln(err)
 		}
-		defer conn.Close()
 
 		fmt.Println("Connection accepted.")
 
-		go func() {
+		go func(conn net.Conn) {
+			defer conn.Close()
+
 			_, err := io.Copy(os.Stdout, conn)
 			if err != nil {
 				log.Fatalln(err)
 			}
-		}()
+		}(conn)
 	}
 }

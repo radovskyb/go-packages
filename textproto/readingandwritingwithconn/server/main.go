@@ -30,6 +30,7 @@ func main() {
 
 func handleConnections(conn net.Conn) {
 	defer conn.Close()
+
 	mw := io.MultiWriter(os.Stdout, conn)
 
 	// NewReader returns a new Reader reading from r.
