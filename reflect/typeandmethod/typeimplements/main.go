@@ -9,17 +9,15 @@ type myStringerInterface interface {
 	String() string
 }
 
-type myStringerType struct {
-	int
-}
+type myStringerType int
 
 func (m myStringerType) String() string {
-	return string(m.int)
+	return string(m)
 }
 
 func main() {
 	// Create a new myStringerType object `ms`
-	ms := myStringerType{10}
+	ms := myStringerType(10)
 
 	// Create a new reflect.Type object `typeofms` from `ms`
 	typeofms := reflect.TypeOf(ms)
