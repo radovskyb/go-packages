@@ -70,11 +70,15 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 				}
 				return
 			}
-			defer outFile.Close()
 
 			// Store the file
 			_, err = io.Copy(outFile, file)
 			if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
+
+			if err := outFile.Close(); err != nil {
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
 			}
