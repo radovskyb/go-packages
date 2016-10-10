@@ -14,7 +14,11 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	defer syscall.Close(fd)
+	defer func() {
+		if err := syscall.Close(fd); err != nil {
+			log.Fatalln(err)
+		}
+	}()
 
 	term := new(syscall.Termios)
 	_, _, e0 := syscall.Syscall6(syscall.SYS_IOCTL, uintptr(fd),

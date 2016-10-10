@@ -12,7 +12,12 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	defer syscall.Close(sockfd) // Close the socket
+	defer func() {
+		// Close the socket
+		if err := syscall.Close(sockfd); err != nil {
+			log.Fatalln(err)
+		}
+	}()
 
 	// Bind the socket to port 9000
 	sockaddr := &syscall.SockaddrInet6{Port: 9000}

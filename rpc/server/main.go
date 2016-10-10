@@ -36,7 +36,7 @@ func main() {
 	// Create a new net listener on port 9000
 	ln, err := net.Listen("tcp", ":9000")
 	if err != nil {
-		log.Fatalln("Listener error: " + err.Error())
+		log.Fatalln(err)
 	}
 
 	// http.Serve will close the listener when it's done with it
