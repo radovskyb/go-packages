@@ -28,5 +28,5 @@ func main() {
 	// unescapes to "á", as does "&#225;" and "&xE1;".
 	// UnescapeString(EscapeString(s)) == s always holds, but the converse isn't
 	// always true.
-	fmt.Println(html.UnescapeString(s))
+	fmt.Println(html.UnescapeString(escaped))
 }
