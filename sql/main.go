@@ -19,7 +19,7 @@ type User struct {
 
 func main() {
 	// Repace username, password and the mydb names.
-	dsn := "root:root@tcp(127.0.0.1:3306)/test"
+	dsn := "username:password@tcp(127.0.0.1:3306)/mydb"
 
 	// Open the database.
 	//
