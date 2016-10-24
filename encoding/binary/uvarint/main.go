@@ -8,11 +8,11 @@ import (
 func main() {
 	var emptybuf []byte
 
-	var buf []byte = []byte{
+	buf := []byte{
 		144, 192, 192, 129, 132, 136, 140, 144, 16, 0, 1, 1,
 	}
 
-	var overflowbuf []byte = []byte{
+	overflowbuf := []byte{
 		144, 192, 192, 129, 132, 136, 140, 144, 192, 192, 1, 1,
 	}
 
