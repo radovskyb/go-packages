@@ -13,10 +13,10 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	// Print out the url's non escaped path
+	// Print out the url's non escaped path.
 	fmt.Println(u.Path) // search name
 
-	// Print the url's escaped path
+	// Print the url's escaped path.
 	//
 	// EscapedPath returns the escaped form of u.Path.
 	// In general there are multiple possible escaped forms of any path.
@@ -29,17 +29,17 @@ func main() {
 	// reading u.RawPath directly.
 	fmt.Println(u.EscapedPath()) // search%20name
 
-	// Print out whether the url is absolute or not
+	// Print out whether the url is absolute or not.
 	fmt.Println(u.IsAbs())
 
 	fmt.Println()
 
-	// Parse another url
+	// Parse another url.
 	u, err = url.Parse("localhost?name=Benjamin")
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	// Print out whether the url is absolute or not
+	// Print out whether the url is absolute or not.
 	fmt.Println(u.IsAbs())
 }
