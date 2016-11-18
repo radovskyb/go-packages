@@ -38,6 +38,11 @@ func main() {
 	// Canceling this context releases resources associated with it, so code should
 	// call cancel as soon as the operations running in this Context complete.
 	ctx, cancel := context.WithTimeout(context.Background(), d1)
+
+	// Even though ctx should have expired already, it is good
+	// practice to call its cancelation function in any case.
+	// Failure to do so may keep the context and its parent alive
+	// longer than necessary.
 	defer cancel()
 
 	// Print a specified message based on whether the context's deadline has expired yet or not.

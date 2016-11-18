@@ -21,6 +21,12 @@ func main() {
 	// requests.
 	ctx, cancel := context.WithCancel(context.Background())
 
+	// Even though ctx should have been cancelled already, it is good
+	// practice to call its cancelation function in any case.
+	// Failure to do so may keep the context and its parent alive
+	// longer than necessary.
+	defer cancel()
+
 	// Create a new message channel.
 	msg := make(chan string)
 
