@@ -19,7 +19,7 @@ var castagnoliTable = crc32.MakeTable(crc32.Castagnoli)
 
 func main() {
 	// New:
-
+	//
 	// New creates a new hash.Hash32 computing the CRC-32 checksum
 	// using the polynomial represented by the Table.
 	crc := crc32.New(castagnoliTable)
@@ -32,13 +32,12 @@ func main() {
 	fmt.Printf("Sum32: %x\n", crc.Sum32())
 
 	// Checksum:
-
+	//
 	// Print out the same as the above with a single
 	// line by calling crc32.Checksum
 	fmt.Printf("Checksum: %x\n", crc32.Checksum([]byte("Hello, World!"), castagnoliTable))
 
 	// NewIEEE:
-
 	crcIEEE := crc32.NewIEEE()
 	_, err = crcIEEE.Write([]byte("Hello, World!"))
 	if err != nil {
@@ -56,7 +55,7 @@ func main() {
 	fmt.Printf("Sum32 after reset and new write: %x\n", crcIEEE.Sum32())
 
 	// ChecksumIEEE:
-
+	//
 	// Print the same as the above's first write with a
 	// single line by calling crc32.ChecksumIEEE
 	//
@@ -66,7 +65,7 @@ func main() {
 	fmt.Printf("ChecksumIEEE: %x \n", checksum)
 
 	// Update:
-
+	//
 	// Original checksum
 	checksum = crc32.Checksum([]byte("Hello"), castagnoliTable)
 
