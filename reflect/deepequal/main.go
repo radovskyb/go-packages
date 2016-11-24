@@ -25,4 +25,13 @@ func main() {
 	if reflect.DeepEqual(sliceOne, sliceTwo) {
 		fmt.Println("Both slices are equal")
 	}
+
+	// Compare 2 maps since you can't compare maps with ==.
+	m1 := map[string]int{"one": 1, "two": 2}
+	m2 := map[string]int{"one": 1, "two": 2}
+
+	// invalid operation: m1 == m2 (map can only be compared to nil)
+	// fmt.Println(m1 == m2)
+
+	fmt.Println(reflect.DeepEqual(m1, m2)) // true
 }
