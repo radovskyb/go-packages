@@ -40,7 +40,7 @@ func TestHomeHandler(t *testing.T) {
 		}
 
 		if !strings.Contains(string(actual), expected) {
-			t.Errorf("Expected body to contain %s\nBody %s", expected, actual)
+			t.Errorf("expected body to contain %s\nbody: %s", expected, actual)
 		}
 	}
 }

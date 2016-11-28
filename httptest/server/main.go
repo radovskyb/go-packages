@@ -8,22 +8,18 @@ import (
 	"sync"
 )
 
-const addr = "localhost:9000"
-
 type homeHandler struct {
-	sync.Mutex
+	mu    sync.Mutex
 	count int
 }
 
 func (h *homeHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "<h1>Home</h1>")
-	var count int
-	h.Lock()
-	h.count++
-	count = h.count
-	h.Unlock()
 
-	fmt.Fprintf(w, "Visitor count: %d.", count)
+	h.mu.Lock()
+	h.count++
+	fmt.Fprintf(w, "Visitor count: %d.\n", h.count)
+	h.mu.Unlock()
 }
 
 func aboutHandler(w http.ResponseWriter, r *http.Request) {
@@ -41,7 +37,7 @@ func main() {
 	mux.HandleFunc("/about", aboutHandler)
 
 	server := &http.Server{
-		Addr:      addr,
+		Addr:      "localhost:9000",
 		Handler:   mux,
 		ConnState: printState,
 	}
