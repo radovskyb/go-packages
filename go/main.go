@@ -48,6 +48,7 @@ func main() {
 	// Print out all of this file's imports.
 	//
 	// Imports are imports in a file.
+	fmt.Println("Imports:")
 	for _, i := range file.Imports {
 		// Path is a an import path.
 		fmt.Println(strings.Trim(i.Path.Value, "\""))
@@ -71,7 +72,7 @@ func main() {
 			// IsExported reports whether id is an exported Go symbol
 			// (that is, whether it begins with an uppercase letter).
 			if !fnc.Name.IsExported() {
-				fmt.Println(fnc.Name.Name)
+				fmt.Printf("Name:\n%s\n\n", fnc.Name.Name)
 			}
 
 			// Print out the function's documentation.
@@ -81,22 +82,23 @@ func main() {
 			// leading and trailing empty lines are removed. Multiple empty lines are
 			// reduced to one, and trailing space on lines is trimmed. Unless the result
 			// is empty, it is newline-terminated.
-			fmt.Println(fnc.Doc.Text())
+			fmt.Printf("Documentation:\n%s\n", fnc.Doc.Text())
 
+			fmt.Println("Function:")
 			// Print out the entire function.
 			//
 			// Fprint "pretty-prints" an AST node to output.
 			// It calls Config.Fprint with default settings.
 			printer.Fprint(os.Stdout, fset, fnc)
 
-			fmt.Println("\n")
-
-			// Now set the function's body to nil so only the
+			// Now set the function's body and doc to nil so only the
 			// function's signature will be printed in the next
 			// call to printer.Fprint.
 			fnc.Body = nil
+			fnc.Doc = nil
 
-			// Now print out only the function's signature with it's documentation.
+			// Now print out only the function's signature without it's documentation.
+			fmt.Println("\n\nSignature:")
 			printer.Fprint(os.Stdout, fset, fnc)
 		}
 		return true
