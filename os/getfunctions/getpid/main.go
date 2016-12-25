@@ -6,11 +6,11 @@ import (
 )
 
 func main() {
-	// Get the proccess id of the caller
+	// Get the process id of the caller
 	//
 	// Getpid returns the process id of the caller.
 	pid := os.Getpid()
 
-	// Print the proccess id
+	// Print the process id
 	fmt.Println(pid)
 }

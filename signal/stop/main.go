@@ -15,7 +15,7 @@ func main() {
 	// Otherwise, just the provided signals will.
 	c := make(chan os.Signal, 1)
 
-	// Notify when an interupt or kill signal is sent to channel c
+	// Notify when an interrupt or kill signal is sent to channel c
 	signal.Notify(c, os.Interrupt, os.Kill)
 
 	// Block until a signal is received.
@@ -28,6 +28,6 @@ func main() {
 	// Stop returns, it is guaranteed that c will receive no more signals.
 	signal.Stop(c)
 
-	// Print any signals that are recieved
+	// Print any signals that are received
 	fmt.Println("Got signal:", s) // Wont print because signal.Stop() was called
 }

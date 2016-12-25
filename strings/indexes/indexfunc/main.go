@@ -8,7 +8,7 @@ import (
 
 func main() {
 	// Create an IndexFunc function that returns true if the
-	// character rune is equivilent to a unicode.Han character
+	// character rune is equivalent to a unicode.Han character
 	f := func(c rune) bool {
 		return unicode.Is(unicode.Han, c)
 	}

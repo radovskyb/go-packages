@@ -53,7 +53,7 @@ func main() {
 	// run would not have returned anything on its standard error pipe,
 	// buf will be empty
 	if buf.Len() == 0 {
-		fmt.Println("No standard error's occured from running the command.")
+		fmt.Println("No standard error's occurred from running the command.")
 	} else {
 		fmt.Print(buf.String())
 	}

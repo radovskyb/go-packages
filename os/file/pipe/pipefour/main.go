@@ -11,7 +11,7 @@ import (
 const filename = "file.txt"
 
 func main() {
-	// Create a new file called file.txt with read/write permissons
+	// Create a new file called file.txt with read/write permissions
 	file, err := os.OpenFile(filename, os.O_CREATE|os.O_RDWR, 0755)
 
 	// Check if there were any errors and if so, log them

@@ -28,7 +28,7 @@ func main() {
 		// reflect the new amount remaining.
 		n, err := lr.Read(buf[0:])
 
-		// Log any errors that may have occured
+		// Log any errors that may have occurred
 		if err != nil {
 			log.Fatalln(err)
 		}

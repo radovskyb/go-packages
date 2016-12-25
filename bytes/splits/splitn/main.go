@@ -9,7 +9,7 @@ func main() {
 	// Create a string s
 	s := "Hello, World! How are you?"
 
-	// Store all subslices of string s seperated by a space. The amount
+	// Store all subslices of string s separated by a space. The amount
 	// of subslices is determined by the integer passed into SplitN
 	//
 	// SplitN slices s into subslices separated by sep and returns

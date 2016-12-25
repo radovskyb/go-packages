@@ -45,7 +45,7 @@ func main() {
 	}
 
 	// Now that everything needed has been read from stdout, call wait
-	// on the command and check if any errors occured whilst calling it
+	// on the command and check if any errors occurred whilst calling it
 	if err := cmd.Wait(); err != nil {
 		// If any errors did occur, log them
 		log.Fatalln(err)

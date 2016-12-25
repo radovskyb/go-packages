@@ -10,7 +10,7 @@ func main() {
 	// Create a new file called file1.txt
 	_, err := os.Create("file1.txt")
 
-	// Check if any errors occured and if so, log them
+	// Check if any errors occurred and if so, log them
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -24,7 +24,7 @@ func main() {
 	// apply. If there is an error, it will be of type *LinkError.
 	err = os.Rename("file1.txt", "file.txt")
 
-	// Check if any errors occured and if so, log them
+	// Check if any errors occurred and if so, log them
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -35,7 +35,7 @@ func main() {
 	// Remove the file now that it's no longer needed
 	err = os.Remove("file.txt")
 
-	// Check if any errors occured and if so, log them
+	// Check if any errors occurred and if so, log them
 	if err != nil {
 		log.Fatalln(err)
 	}

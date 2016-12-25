@@ -9,7 +9,7 @@ import (
 
 func main() {
 	// Create an artificial input source.
-	const input = "This is some awesome input, created artifically for input"
+	const input = "This is some awesome input, created artificially for input"
 
 	// Create a new buffered scanner from the input source but since
 	// bufio.NewScanner takes a reader and input is just plain text,
@@ -35,7 +35,7 @@ func main() {
 		fmt.Println(scanner.Text())
 	}
 
-	// Check if any scanner errors occured and if so log them
+	// Check if any scanner errors occurred and if so log them
 	if err := scanner.Err(); err != nil {
 		log.Fatalln(err)
 	}

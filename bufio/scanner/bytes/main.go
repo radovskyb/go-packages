@@ -16,7 +16,7 @@ func main() {
 	ss := bufio.NewScanner(strings.NewReader(s))
 
 	// Use bufio.ScanBytes as the scanners splitter
-	// which will split the string into seperate bytes
+	// which will split the string into separate bytes
 	ss.Split(bufio.ScanBytes)
 
 	// Scan the first token from ss

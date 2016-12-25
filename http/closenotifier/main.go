@@ -14,7 +14,7 @@ var msg = make(chan int)
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	// Set the correct headers to allow the connection to
-	// be kept alive and the content type to allow continous
+	// be kept alive and the content type to allow continuous
 	// message sending through channel msg
 	w.Header().Set("Content-Type", "text/event-stream")
 	w.Header().Set("Cache-Control", "no-cache")

@@ -12,7 +12,7 @@ func main() {
 	// if we're not ready to receive when the signal is sent.
 	c := make(chan os.Signal, 1)
 
-	// Notify when an interupt or kill signal is sent to channel c
+	// Notify when an interrupt or kill signal is sent to channel c
 	signal.Notify(c, os.Interrupt, os.Kill)
 
 	// Ignore causes the provided signals to be ignored. If they are
@@ -38,6 +38,6 @@ func main() {
 	// Block until a signal is received.
 	s := <-c
 
-	// Print any signals that are recieved
+	// Print any signals that are received
 	fmt.Println("\nReceived signal:", s) // Received signal: interrupt
 }

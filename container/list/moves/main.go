@@ -33,7 +33,7 @@ func main() {
 	// the second element in the list
 	printList(l)
 
-	// Now move e1 which is now techincally element 2 in the list,
+	// Now move e1 which is now technically element 2 in the list,
 	// back to the first position, by placing it back in front of
 	// what is now the first element in the list
 	//

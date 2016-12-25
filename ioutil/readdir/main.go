@@ -15,7 +15,7 @@ func main() {
 
 	// Check if there were any errors
 	if err != nil {
-		// Log any errors that occured
+		// Log any errors that occurred
 		log.Fatalln(err)
 	}
 

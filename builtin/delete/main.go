@@ -10,7 +10,7 @@ func main() {
 	// Create a map of [string]int
 	m := make(map[string]int)
 
-	// Add three seperate elements into our map m
+	// Add three separate elements into our map m
 	m["first"] = 1
 	m["second"] = 2
 	m["third"] = 3

@@ -34,7 +34,7 @@ func main() {
 		fmt.Println(scanner.Text())
 	}
 
-	// Check if any scanner errors occured and if so log them
+	// Check if any scanner errors occurred and if so log them
 	if err := scanner.Err(); err != nil {
 		log.Fatalln(err)
 	}

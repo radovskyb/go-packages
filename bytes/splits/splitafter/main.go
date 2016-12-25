@@ -9,7 +9,7 @@ func main() {
 	// Create a string s
 	s := "Hello, World!"
 
-	// Store all subslices of string s seperated after each
+	// Store all subslices of string s separated after each
 	// instance of a space
 	//
 	// SplitAfter slices s into all subslices after each instance

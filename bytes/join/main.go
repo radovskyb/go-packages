@@ -12,7 +12,7 @@ func main() {
 	b2 := []byte("def")
 
 	// Join byte slices b1 and b2 together, using a space for a
-	// seperator and then store the returned byte slice in b3.
+	// separator and then store the returned byte slice in b3.
 	//
 	// Join concatenates the elements of s to create a new byte slice.
 	// The separator sep is placed between elements in the resulting slice.

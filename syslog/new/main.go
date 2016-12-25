@@ -13,7 +13,7 @@ func main() {
 	// New establishes a new connection to the system log daemon.  Each
 	// write to the returned writer sends a log message with the given
 	// priority and prefix.
-	wLogger, err := syslog.New(syslog.LOG_CRIT, "A critical error occured! ")
+	wLogger, err := syslog.New(syslog.LOG_CRIT, "A critical error occurred! ")
 	if err != nil {
 		log.Fatalln(err)
 	}

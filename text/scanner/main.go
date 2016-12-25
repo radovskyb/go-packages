@@ -62,7 +62,7 @@ func main() {
 		tok = s.Scan()
 
 		if tok != scanner.EOF {
-			// Print the line number and position imediately after the character
+			// Print the line number and position immediately after the character
 			// or token returned by the last call to `s.Scan()` as well as print
 			// the most recently valid scanned token after calling `s.Scan()`.
 			//

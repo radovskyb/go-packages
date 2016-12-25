@@ -17,7 +17,7 @@ func main() {
 
 	// Check if there were any errors from ReadFile
 	if err != nil {
-		// Print any errors that occured
+		// Print any errors that occurred
 		log.Fatalln(err)
 	}
 

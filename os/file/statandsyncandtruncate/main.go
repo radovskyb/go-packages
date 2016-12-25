@@ -47,7 +47,7 @@ func main() {
 
 	// Commit the current contents of the file to stable storage, we would
 	// do this for example if the file is really big or incase of a power
-	// failure occuring.
+	// failure occurring.
 	//
 	// Sync commits the current contents of the file to stable storage.
 	// Typically, this means flushing the file system's in-memory copy

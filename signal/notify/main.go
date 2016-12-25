@@ -27,12 +27,12 @@ func main() {
 	// the same signals: each channel receives copies of incoming signals independently.
 	c := make(chan os.Signal, 1)
 
-	// Notify when an interupt or kill signal is sent to channel c
+	// Notify when an interrupt or kill signal is sent to channel c
 	signal.Notify(c, os.Interrupt, os.Kill)
 
 	// Block until a signal is received.
 	s := <-c
 
-	// Print any signals that are recieved
+	// Print any signals that are received
 	fmt.Println("\nReceived signal:", s) // Received signal: interrupt
 }

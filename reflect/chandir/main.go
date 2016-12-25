@@ -14,7 +14,7 @@ func main() {
 	fmt.Println("Channel chOne's type is:", typeChOne.ChanDir().String())
 	fmt.Println("Channel chOne - Send direction only:",
 		typeChOne.ChanDir() == reflect.SendDir)
-	fmt.Println("Channel chOne - Recieve direction only:",
+	fmt.Println("Channel chOne - Receive direction only:",
 		typeChOne.ChanDir() == reflect.RecvDir)
 
 	fmt.Println()
@@ -25,7 +25,7 @@ func main() {
 	fmt.Println("Channel chTwo's type is:", typeChTwo.ChanDir().String())
 	fmt.Println("Channel chTwo - Send direction only:",
 		typeChTwo.ChanDir() == reflect.SendDir)
-	fmt.Println("Channel chTwo - Recieve direction only:",
+	fmt.Println("Channel chTwo - Receive direction only:",
 		typeChTwo.ChanDir() == reflect.RecvDir)
 
 	fmt.Println()
@@ -37,7 +37,7 @@ func main() {
 		typeChThree.ChanDir().String())
 	fmt.Println("Channel chThree - Send direction only:",
 		typeChThree.ChanDir() == reflect.SendDir)
-	fmt.Println("Channel chThree - Recieve direction only:",
+	fmt.Println("Channel chThree - Receive direction only:",
 		typeChThree.ChanDir() == reflect.RecvDir)
 	fmt.Println("Channel chThree - Both directions (Send & Receive):",
 		typeChThree.ChanDir() == reflect.BothDir)

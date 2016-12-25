@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	// Below, fmt.Println prints the given string and adds a space around any seperate
+	// Below, fmt.Println prints the given string and adds a space around any separate
 	// operands such as "string" in this case as well as adds a \n character at the end
 	//
 	// Println formats using the default formats for its operands and writes to standard output.

@@ -23,7 +23,7 @@ func NewCustomProxy(target string) *CustomProxy {
 	director := func(req *http.Request) {
 		url, err := url.Parse(target)
 		if err != nil {
-			log.Fatalln("An error occured:", err.Error())
+			log.Fatalln("An error occurred:", err.Error())
 		}
 
 		req.URL.Scheme = url.Scheme

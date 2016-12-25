@@ -36,7 +36,7 @@ func main() {
 		// Read from the pipe into `buf`.
 		n, err := syscall.Read(fds[0], buf)
 
-		// If n is zero or an error occured, exit the loop, we are
+		// If n is zero or an error occurred, exit the loop, we are
 		// finished reading from the pipe.
 		if n == 0 || err != nil {
 			break

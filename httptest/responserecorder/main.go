@@ -9,7 +9,7 @@ import (
 
 func main() {
 	handler := func(w http.ResponseWriter, r *http.Request) {
-		http.Error(w, "An error occured", http.StatusInternalServerError)
+		http.Error(w, "An error occurred", http.StatusInternalServerError)
 	}
 
 	req, err := http.NewRequest("GET", "http://betsee.com.au", nil)

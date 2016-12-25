@@ -27,7 +27,7 @@ func main() {
 			break
 		}
 		if err != nil {
-			log.Fatalln("Could not retreive record:", err)
+			log.Fatalln("Could not retrieve record:", err)
 		}
 
 		// Print the record

@@ -12,7 +12,7 @@ func main() {
 	// will return a cleaned version of fullPath with no ../'s or ./'s
 	fullPath := "/Users/Benjamin/Workspace/go/src/../src/pkgchallenge/path/../path/./base"
 
-	// Print the shortest path name equivelent to fullPath above
+	// Print the shortest path name equivalent to fullPath above
 	//
 	// Clean returns the shortest path name equivalent to path by
 	// purely lexical processing. It applies the following rules iteratively

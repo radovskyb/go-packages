@@ -12,7 +12,7 @@ func main() {
 	b := []byte("Hello, World!")
 
 	// Create a new byte slice encodeBuf, which is the size of
-	// the encoded length of the hex encoding of the lenght of b
+	// the encoded length of the hex encoding of the length of b
 	//
 	// EncodedLen returns the length of an encoding of n source bytes.
 	encodeBuf := make([]byte, hex.EncodedLen(len(b)))

@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	// Create some sample artifical input to be used to write to a writer
+	// Create some sample artificial input to be used to write to a writer
 	const input = "Hello"
 
 	// Create a new buffered writer to os.Stdout using bufio.NewWriter
