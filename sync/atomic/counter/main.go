@@ -7,8 +7,8 @@ import (
 	"sync/atomic"
 )
 
-// hitCounter is a middleware handler that increments the
-// counter value, every time there's a new request.
+// hitCounter is a middleware handler that increments it's
+// counter value every time a new request is received.
 type hitCounter struct {
 	hits uint64
 }
@@ -34,7 +34,8 @@ func main() {
 	// Load indexHandler when any page is requested.
 	http.HandleFunc("/", indexHandler)
 
-	// ListenAndServe and serve all requests through the hc handler.
+	// ListenAndServe at localhost:9000, serving all
+	// requests through the hc handler.
 	log.Fatal(http.ListenAndServe(":9000", hc))
 
 	// To test hit counter.
