@@ -10,7 +10,7 @@ type Client struct {
 }
 
 func (c Client) Talk() {
-	fmt.Println("Hi, my name is: " + c.Name)
+	fmt.Printf("Hi, my name is %s.\n", c.Name)
 }
 
 func NewClient(name string) *Client {
@@ -18,7 +18,7 @@ func NewClient(name string) *Client {
 }
 
 func main() {
-	// Create a new sync.Pool called pool
+	// Create a new sync.Pool called pool.
 	//
 	// A Pool is a set of temporary objects that may be individually saved and
 	// retrieved.
@@ -50,20 +50,19 @@ func main() {
 	// free list.
 	var pool = &sync.Pool{
 		// Set the pool's new function to return a value
-		// from calling NewClient("Pool")
+		// from calling NewClient("Pool").
 		New: func() interface{} {
 			return NewClient("Pool")
 		},
 	}
 
-	// Create a new client and call it's Talk method
+	// Create a new client and call it's Talk method.
 	c1 := NewClient("Client One")
 
-	// Calling c1 talk says that it's name is Client One
+	// Calling c1 talk says that it's name is Client One.
 	c1.Talk()
 
-	// Now that we are done with it, put the
-	// client c1 in to the pool
+	// Now that we are done with it, put the client c1 in to the pool.
 	pool.Put(c1)
 
 	// Now `later` another client is needed, so now instead
@@ -79,12 +78,12 @@ func main() {
 	// However, since godoc states that `Callers should not assume
 	// any relation between values passed to Put and the values
 	// returned by Get.`, It's possible that this will actually
-	// say that it's name is Pool (go run -race main.go)
+	// say that it's name is Pool (go run -race main.go).
 	c2.Talk()
 
 	// Now another client is needed, but c2 is still being used, so
 	// now calling pool.Get().(*Client) will return a new client which
-	// is created from using the pool.New() method
+	// is created from using the pool.New() method.
 	c3 := pool.Get().(*Client)
 
 	// Call c3's Talk method which says that it's name is Pool.
