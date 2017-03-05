@@ -23,7 +23,7 @@ func main() {
 	// a delimiter, it returns the data read before the error and the
 	// error itself (often io.EOF). ReadBytes returns err != nil if and
 	// only if the returned data does not end in delim.
-	b, err := buf.ReadByte(byte(','))
+	b, err := buf.ReadBytes(byte(','))
 	if err != nil {
 		log.Fatalln(err)
 	}
