@@ -29,7 +29,7 @@ func main() {
 	// It panics if a value in the map is not a function with appropriate return
 	// type. However, it is legal to overwrite elements of the map. The return
 	// value is the template, so calls can be chained.
-	namesTmpl, err := template.New("names").Funcs(funcs).Parse(numbersTmplSrc)
+	namesTmpl, err := template.New("numbers").Funcs(funcs).Parse(numbersTmplSrc)
 	if err != nil {
 		log.Fatalln(err)
 	}
