@@ -16,8 +16,8 @@ func main() {
 		// well as some syscall errors.
 		if os.IsExist(err) {
 			// fmt.Println(os.IsExists(err) will print true since we know the
-			// tmp folder already exists.
-			fmt.Printf("%t: the tmp folder already exists.", os.IsExist(err))
+			// tmp file already exists.
+			fmt.Printf("%t: tmp file already exists.\n", os.IsExist(err))
 		} else {
 			// It must be a different error since tmp doesn't exist.
 			log.Fatalln(err)

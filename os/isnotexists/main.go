@@ -17,7 +17,7 @@ func main() {
 		if os.IsNotExist(err) {
 			// fmt.Println(os.IsExists(err) will print false since we know the
 			// tmp folder doesn't exist.
-			fmt.Printf("%t: the tmp folder doesn't exist.", os.IsExist(err))
+			fmt.Printf("%t: tmp folder doesn't exist.\n", os.IsExist(err))
 		} else {
 			// It must be a different error since tmp exists.
 			log.Fatalln(err)
