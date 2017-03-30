@@ -9,7 +9,7 @@ import (
 func main() {
 	_, err := os.Stat("tmp")
 	if err != nil {
-		// Check if the directory does not yet exist
+		// Check if the directory does not yet exist.
 		//
 		// IsNotExist returns a boolean indicating whether the error is known to
 		// report that a file or directory does not exist. It is satisfied by
