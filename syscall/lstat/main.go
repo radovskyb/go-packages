@@ -10,7 +10,8 @@ import (
 func main() {
 	stat := new(syscall.Stat_t)
 
-	// Stat returns file attributes about an inode.
+	// Lstat is identical to Stat, except that if path is a symbolic link,
+	// then the link itself is stat-ed, not the file that it refers to.
 	if err := syscall.Stat("main.go", stat); err != nil {
 		log.Fatalln(err)
 	}
