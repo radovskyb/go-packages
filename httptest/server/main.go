@@ -34,6 +34,9 @@ func main() {
 	mux := http.NewServeMux()
 	homeHandler := &homeHandler{}
 	mux.Handle("/", homeHandler)
+	// Ignore any /favicon.ico GET requests from the browser to prevent
+	// double incrementing of the homeHandler count.
+	mux.HandleFunc("/favicon.ico", http.NotFound)
 	mux.HandleFunc("/about", aboutHandler)
 
 	server := &http.Server{
